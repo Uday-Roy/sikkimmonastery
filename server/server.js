@@ -100,7 +100,7 @@ app.use((err, req, res, next) => {
 console.log("✅ JWT_SECRET configured:", !!process.env.JWT_SECRET);
 const PORT = process.env.PORT || 5000;
 
-app.listen(PORT, () => {
+app.listen(PORT, "0.0.0.0", () => {
   console.log(`\n🏛️  Monastery360 Server running on PORT ${PORT}`);
   // console.log(`📡 API: http://localhost:${PORT}`);
   console.log(`📡 API: https://sikkimmonastery-production.up.railway.app`);
