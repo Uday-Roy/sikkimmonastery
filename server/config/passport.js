@@ -1,7 +1,7 @@
-const passport = require("passport");
-const GoogleStrategy = require("passport-google-oauth20").Strategy;
-const User = require("../models/User");
-const GitHubStrategy = require("passport-github2").Strategy;
+//const passport = require("passport");
+//const GoogleStrategy = require("passport-google-oauth20").Strategy;
+//const User = require("../models/User");
+//const GitHubStrategy = require("passport-github2").Strategy;
 
 // passport.use(
 //   new GoogleStrategy(
@@ -27,20 +27,130 @@ const GitHubStrategy = require("passport-github2").Strategy;
 //     },
 //   ),
 
-  // Google OAuth strategy
-  passport.use(
-  new GitHubStrategy(
+// Google OAuth strategy
+//   passport.use(
+//   new GitHubStrategy(
+//     {
+//       clientID: process.env.GITHUB_CLIENT_ID,
+//       clientSecret: process.env.GITHUB_CLIENT_SECRET,
+//       callbackURL:
+//         "https://sikkimmonastery.onrender.com/auth/github/callback",
+//     },
+
+//     async (accessToken, refreshToken, profile, done) => {
+//       try {
+//         const User = require("../models/User");
+
+//         let user = await User.findOne({
+//           email: profile.emails?.[0]?.value,
+//         });
+
+//         if (!user) {
+//           user = await User.create({
+//             name: profile.displayName || profile.username,
+//             email: profile.emails?.[0]?.value,
+//             password: "github-login",
+//           });
+//         }
+
+//         done(null, user);
+//       } catch (err) {
+//         done(err, null);
+//       }
+//     },
+//   ),
+// );
+
+//   // GitHub OAuth strategy (optional)
+//   passport.use(
+//     new GitHubStrategy(
+//       {
+//         clientID: process.env.GITHUB_CLIENT_ID,
+//         clientSecret: process.env.GITHUB_CLIENT_SECRET,
+//         callbackURL:
+//           "https://sikkimmonastery.onrender.com/auth/github/callback",
+//       },
+
+//       async (accessToken, refreshToken, profile, done) => {
+//         try {
+//           const User = require("../models/User");
+
+//           let user = await User.findOne({
+//             email: profile.emails?.[0]?.value,
+//           });
+
+//           if (!user) {
+//             user = await User.create({
+//               name: profile.displayName || profile.username,
+//               email: profile.emails?.[0]?.value,
+//               password: "github-login",
+//             });
+//           }
+
+//           done(null, user);
+//         } catch (err) {
+//           done(err, null);
+//         }
+//       },
+//     ),
+//   ),
+
+// module.exports = passport;
+
+// ***   full code for passport.js
+
+const passport = require("passport");
+
+const GoogleStrategy = require("passport-google-oauth20").Strategy;
+
+const GitHubStrategy = require("passport-github2").Strategy;
+
+const User = require("../models/User");
+
+// GOOGLE LOGIN
+passport.use(
+  new GoogleStrategy(
     {
-      clientID: process.env.GITHUB_CLIENT_ID,
-      clientSecret: process.env.GITHUB_CLIENT_SECRET,
-      callbackURL:
-        "https://sikkimmonastery.onrender.com/auth/github/callback",
+      clientID: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+
+      callbackURL: "https://sikkimmonastery.onrender.com/auth/google/callback",
     },
 
     async (accessToken, refreshToken, profile, done) => {
       try {
-        const User = require("../models/User");
+        let user = await User.findOne({
+          email: profile.emails[0].value,
+        });
 
+        if (!user) {
+          user = await User.create({
+            name: profile.displayName,
+            email: profile.emails[0].value,
+            password: "google-login",
+          });
+        }
+
+        return done(null, user);
+      } catch (err) {
+        return done(err, null);
+      }
+    },
+  ),
+);
+
+// GITHUB LOGIN
+passport.use(
+  new GitHubStrategy(
+    {
+      clientID: process.env.GITHUB_CLIENT_ID,
+      clientSecret: process.env.GITHUB_CLIENT_SECRET,
+
+      callbackURL: "https://sikkimmonastery.onrender.com/auth/github/callback",
+    },
+
+    async (accessToken, refreshToken, profile, done) => {
+      try {
         let user = await User.findOne({
           email: profile.emails?.[0]?.value,
         });
@@ -48,51 +158,19 @@ const GitHubStrategy = require("passport-github2").Strategy;
         if (!user) {
           user = await User.create({
             name: profile.displayName || profile.username,
-            email: profile.emails?.[0]?.value,
+
+            email:
+              profile.emails?.[0]?.value || `${profile.username}@github.com`,
+
             password: "github-login",
           });
         }
 
-        done(null, user);
+        return done(null, user);
       } catch (err) {
-        done(err, null);
+        return done(err, null);
       }
     },
-  ),
-);
-
-  // GitHub OAuth strategy (optional)
-  passport.use(
-    new GitHubStrategy(
-      {
-        clientID: process.env.GITHUB_CLIENT_ID,
-        clientSecret: process.env.GITHUB_CLIENT_SECRET,
-        callbackURL:
-          "https://sikkimmonastery.onrender.com/auth/github/callback",
-      },
-
-      async (accessToken, refreshToken, profile, done) => {
-        try {
-          const User = require("../models/User");
-
-          let user = await User.findOne({
-            email: profile.emails?.[0]?.value,
-          });
-
-          if (!user) {
-            user = await User.create({
-              name: profile.displayName || profile.username,
-              email: profile.emails?.[0]?.value,
-              password: "github-login",
-            });
-          }
-
-          done(null, user);
-        } catch (err) {
-          done(err, null);
-        }
-      },
-    ),
   ),
 );
 
