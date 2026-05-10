@@ -9,7 +9,13 @@ dotenv.config({ path: path.join(__dirname, ".env") });
 // Initialize app BEFORE connecting to DB
 const app = express();
 
-app.use(cors());
+// app.use(cors());
+app.use(
+  cors({
+    origin: "https://sikkimmonastery.vercel.app",
+    credentials: true,
+  }),
+);
 app.use(express.json());
 
 // Connect to DB with error handling
@@ -78,7 +84,10 @@ app.get(
       email: req.user.email || "",
       role: req.user.role || "user",
     });
-    res.redirect(`http://127.0.0.1:5500/client/index.html?${qs.toString()}`);
+    res.redirect(
+      `https://sikkimmonastery.vercel.app/index.html?${qs.toString()}`,
+    );
+    //res.redirect(`http://127.0.0.1:5500/client/index.html?${qs.toString()}`);
   },
 );
 
@@ -93,7 +102,8 @@ const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
   console.log(`\n🏛️  Monastery360 Server running on PORT ${PORT}`);
-  console.log(`📡 API: http://localhost:${PORT}`);
+  // console.log(`📡 API: http://localhost:${PORT}`);
+  console.log(`📡 API: https://sikkimmonastery-production.up.railway.app`);
   console.log(`🔐 JWT configured: ${!!process.env.JWT_SECRET}`);
   console.log(
     `📧 Email service: ${process.env.EMAIL_USER || process.env.MAIL_USER ? "✅ Configured" : "⚠️  Not configured"}`,
@@ -102,3 +112,5 @@ app.listen(PORT, () => {
     `📱 SMS service: ${process.env.TWILIO_SID && process.env.TWILIO_AUTH && process.env.TWILIO_PHONE ? "✅ Configured" : "⚠️  Not configured"}\n`,
   );
 });
+
+// *** new server.js backend and frontend implemeted from online serevr

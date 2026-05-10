@@ -136,7 +136,8 @@ function saveCookiePreferences() {
 
 // Save consent to database
 async function saveCookieConsentToDatabase(consent) {
-  const token = localStorage.getItem("token") || localStorage.getItem("m360_token");
+  const token =
+    localStorage.getItem("token") || localStorage.getItem("m360_token");
   if (!token) return;
 
   try {
@@ -150,10 +151,13 @@ async function saveCookieConsentToDatabase(consent) {
     });
     const data = await res.json();
     if (res.ok && data.user) {
-      localStorage.setItem("m360_sess", JSON.stringify({
-        ...getU(),
-        ...data.user,
-      }));
+      localStorage.setItem(
+        "m360_sess",
+        JSON.stringify({
+          ...getU(),
+          ...data.user,
+        }),
+      );
     }
   } catch (err) {
     console.error("Failed to save consent:", err);
@@ -173,7 +177,7 @@ function syncStoredCookieConsent() {
 // ═══════════════════════════════════════════════════════════════════
 
 // async function payNow() {
-//   const res = await fetch("http://localhost:5000/api/payment/create-order", {
+//   const res = await fetch("http://https://sikkimmonastery-production.up.railway.app/api/payment/create-order", {
 //     method: "POST",
 //     headers: { "Content-Type": "application/json" },
 //     body: JSON.stringify({ amount: 500 }),
@@ -191,7 +195,7 @@ function syncStoredCookieConsent() {
 
 //     handler: async function (response) {
 //       const verifyRes = await fetch(
-//         "http://localhost:5000/api/payment/verify",
+//         "http://https://sikkimmonastery-production.up.railway.app/api/payment/verify",
 //         {
 //           method: "POST",
 //           headers: { "Content-Type": "application/json" },
@@ -1200,7 +1204,7 @@ let CUR_FILTER = "All",
   PENDING_SIGNUP = null,
   OTP_TIMER = null;
 
-const API_URL = "http://localhost:5000/api";
+const API_URL = "http://https://sikkimmonastery-production.up.railway.app/api";
 
 const FIREBASE_CONFIG = {
   apiKey: "AIzaSyAy99E3DU7Gv9pcILQEG4vtGTWTz_aqhpg",
@@ -1219,10 +1223,7 @@ function initFirebaseAuth() {
 
 // ═══════════════════════ INIT ═══════════════════════
 window.addEventListener("load", () => {
-  setTimeout(
-    skipSplash,
-    5000,
-  );
+  setTimeout(skipSplash, 5000);
   initCookieConsent(); // Initialize cookie consent
   initFirebaseAuth();
   initExperience();
@@ -1550,11 +1551,15 @@ function doLandingSignup() {
 
 async function continueGuest() {
   ss("hero");
-  showT("You can explore freely. Please signup or login to book, review, or save favourites.", "gold");
+  showT(
+    "You can explore freely. Please signup or login to book, review, or save favourites.",
+    "gold",
+  );
 }
 
 function startGoogleLogin() {
-  window.location.href = "http://localhost:5000/auth/google";
+  window.location.href =
+    "https://sikkimmonastery-production.up.railway.app/auth/google";
 }
 
 async function startGithubLogin() {
@@ -1893,8 +1898,10 @@ function buildCultureMessage(m) {
   const regionMood = {
     East: "a gateway where Gangtok's living Buddhist practice meets modern Sikkim travel",
     West: "a heritage belt tied to early Sikkimese history, royal memory, and Kanchenjunga views",
-    North: "a quieter Himalayan route shaped by high valleys, prayer flags, and deep monastic tradition",
-    South: "a warm cultural circuit where monasteries, hill towns, and community festivals come together",
+    North:
+      "a quieter Himalayan route shaped by high valleys, prayer flags, and deep monastic tradition",
+    South:
+      "a warm cultural circuit where monasteries, hill towns, and community festivals come together",
   };
   return `${m.name} represents ${regionMood[m.region] || "Sikkim's sacred heritage"}. Visit with a calm pace, respect prayer spaces, and notice how art, chants, architecture, and local hospitality keep Sikkim's monastery culture alive.`;
 }
@@ -2653,12 +2660,11 @@ function appendAiMessage(text, type) {
 
 function buildAiAnswer(question) {
   const q = question.toLowerCase();
-  const region = ["east", "west", "north", "south"].find((r) =>
-    q.includes(r),
-  );
-  const matchedMonastery = MD.find((m) =>
-    q.includes(m.name.toLowerCase().split(" ")[0]) ||
-    q.includes(m.name.toLowerCase()),
+  const region = ["east", "west", "north", "south"].find((r) => q.includes(r));
+  const matchedMonastery = MD.find(
+    (m) =>
+      q.includes(m.name.toLowerCase().split(" ")[0]) ||
+      q.includes(m.name.toLowerCase()),
   );
 
   if (matchedMonastery) {
@@ -2676,7 +2682,11 @@ function buildAiAnswer(question) {
     return "To book, open Book Your Monastery Tour, choose a package, fill your details, and pay through Razorpay test checkout. After successful verification, the booking is saved in MongoDB and shown in the dashboard/admin booking data.";
   }
 
-  if (q.includes("photo") || q.includes("photography") || q.includes("camera")) {
+  if (
+    q.includes("photo") ||
+    q.includes("photography") ||
+    q.includes("camera")
+  ) {
     const photoPlan = PLANS.find((p) => p.nm.toLowerCase().includes("photo"));
     return photoPlan
       ? `${photoPlan.nm} is best for photography. It costs Rs ${photoPlan.price.toLocaleString("en-IN")} per person and includes ${photoPlan.feats.slice(0, 3).join(", ")}.`
@@ -2917,7 +2927,8 @@ function loadRazorpay() {
   script.async = true;
   RAZORPAY_LOAD_PROMISE = new Promise((resolve, reject) => {
     script.onload = resolve;
-    script.onerror = () => reject(new Error("Razorpay checkout could not load"));
+    script.onerror = () =>
+      reject(new Error("Razorpay checkout could not load"));
   });
   document.body.appendChild(script);
   return RAZORPAY_LOAD_PROMISE;
@@ -2993,7 +3004,10 @@ async function processRazorpayPayment() {
         status: "confirmed-demo",
       });
       cm("payOv");
-      showT("Demo booking confirmed. Add Razorpay keys in server/.env for live checkout.", "success");
+      showT(
+        "Demo booking confirmed. Add Razorpay keys in server/.env for live checkout.",
+        "success",
+      );
       return;
     }
     await loadRazorpay();
