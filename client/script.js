@@ -1564,19 +1564,19 @@ function startGoogleLogin() {
   window.location.href = "https://sikkimmonastery.onrender.com/auth/google";
 }
 
-async function startGithubLogin() {
-  try {
-    initFirebaseAuth();
-    if (!window.firebase) throw new Error("Firebase SDK is not loaded");
+// async function startGithubLogin() {
+//   try {
+//     initFirebaseAuth();
+//     if (!window.firebase) throw new Error("Firebase SDK is not loaded");
 
-    const provider = new firebase.auth.GithubAuthProvider();
-    provider.addScope("user:email");
-    const result = await firebase.auth().signInWithPopup(provider);
-    await finishSocialLogin(result.user, "github");
-  } catch (err) {
-    showT(err.message || "GitHub login failed", "error");
-  }
-}
+//     const provider = new firebase.auth.GithubAuthProvider();
+//     provider.addScope("user:email");
+//     const result = await firebase.auth().signInWithPopup(provider);
+//     await finishSocialLogin(result.user, "github");
+//   } catch (err) {
+//     showT(err.message || "GitHub login failed", "error");
+//   }
+// }
 
 async function finishSocialLogin(firebaseUser, provider) {
   const res = await fetch(`${API_URL}/auth/social-login`, {
