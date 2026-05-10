@@ -177,7 +177,7 @@ function syncStoredCookieConsent() {
 // ═══════════════════════════════════════════════════════════════════
 
 // async function payNow() {
-//   const res = await fetch("http://https://sikkimmonastery-production.up.railway.app/api/payment/create-order", {
+//   const res = await fetch("http://https://sikkimmonastery.onrender.com/api/payment/create-order", {
 //     method: "POST",
 //     headers: { "Content-Type": "application/json" },
 //     body: JSON.stringify({ amount: 500 }),
@@ -195,7 +195,7 @@ function syncStoredCookieConsent() {
 
 //     handler: async function (response) {
 //       const verifyRes = await fetch(
-//         "http://https://sikkimmonastery-production.up.railway.app/api/payment/verify",
+//         "http://https://sikkimmonastery.onrender.com/api/payment/verify",
 //         {
 //           method: "POST",
 //           headers: { "Content-Type": "application/json" },
@@ -1204,7 +1204,7 @@ let CUR_FILTER = "All",
   PENDING_SIGNUP = null,
   OTP_TIMER = null;
 
-const API_URL = "http://https://sikkimmonastery-production.up.railway.app/api";
+const API_URL = "https://sikkimmonastery.onrender.com/api";
 
 const FIREBASE_CONFIG = {
   apiKey: "AIzaSyAy99E3DU7Gv9pcILQEG4vtGTWTz_aqhpg",
@@ -1558,8 +1558,7 @@ async function continueGuest() {
 }
 
 function startGoogleLogin() {
-  window.location.href =
-    "https://sikkimmonastery-production.up.railway.app/auth/google";
+  window.location.href = "https://sikkimmonastery.onrender.com/auth/google";
 }
 
 async function startGithubLogin() {

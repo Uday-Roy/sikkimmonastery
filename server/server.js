@@ -103,7 +103,8 @@ const PORT = process.env.PORT || 5000;
 app.listen(PORT, "0.0.0.0", () => {
   console.log(`\n🏛️  Monastery360 Server running on PORT ${PORT}`);
   // console.log(`📡 API: http://localhost:${PORT}`);
-  console.log(`📡 API: https://sikkimmonastery-production.up.railway.app`);
+  //console.log(`📡 API: https://sikkimmonastery-production.up.railway.app`);
+  console.log(`📡 API: https://sikkimmonastery.onrender.com`);
   console.log(`🔐 JWT configured: ${!!process.env.JWT_SECRET}`);
   console.log(
     `📧 Email service: ${process.env.EMAIL_USER || process.env.MAIL_USER ? "✅ Configured" : "⚠️  Not configured"}`,

@@ -10,10 +10,10 @@
 require("dotenv").config();
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
-const User = require("./models/User");
-const Monastery = require("./models/Monastery");
-const Image = require("./models/Image");
-const Testimonial = require("./models/Testimonial");
+const User = require("../server/models/User");
+const Monastery = require("../server/models/Monastery");
+const Image = require("../server/models/Image");
+const Testimonial = require("../server/models/Testimonial");
 
 const ADMIN_EMAIL = process.env.ADMIN_EMAIL || "admin@monastery360.com";
 const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || "admin@123";
@@ -91,7 +91,7 @@ async function initializeAdmin() {
     console.log("✨ Admin initialization complete!\n");
     console.log("🚀 Next steps:");
     console.log(
-      `   1. Login to admin panel at: http://localhost:5000/admin.html`,
+      `   1. Login to admin panel at: https://sikkimmonastery.vercel.app/admin.html`,
     );
     console.log(`   2. Email: ${ADMIN_EMAIL}`);
     console.log(`   3. Password: ${ADMIN_PASSWORD}`);
