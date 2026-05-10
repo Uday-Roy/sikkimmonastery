@@ -1243,9 +1243,9 @@ window.addEventListener("load", () => {
   );
 });
 
-// function skipSplash() {
-//   document.getElementById("loader")?.classList.add("hide");
-// }
+function skipSplash() {
+  document.getElementById("loader")?.classList.add("hide");
+}
 
 window.addEventListener("scroll", () => {
   if (window.scrollY > 60) document.getElementById("nb").classList.add("sc");
@@ -1549,13 +1549,13 @@ function doLandingSignup() {
   doSignup();
 }
 
-// async function continueGuest() {
-//   ss("hero");
-//   showT(
-//     "You can explore freely. Please signup or login to book, review, or save favourites.",
-//     "gold",
-//   );
-// }
+async function continueGuest() {
+  ss("hero");
+  showT(
+    "You can explore freely. Please signup or login to book, review, or save favourites.",
+    "gold",
+  );
+}
 function startGithubLogin() {
   window.location.href = "https://sikkimmonastery.onrender.com/auth/github";
 }
@@ -1564,19 +1564,19 @@ function startGoogleLogin() {
   window.location.href = "https://sikkimmonastery.onrender.com/auth/google";
 }
 
-// async function startGithubLogin() {
-//   try {
-//     initFirebaseAuth();
-//     if (!window.firebase) throw new Error("Firebase SDK is not loaded");
+async function startGithubLogin() {
+  try {
+    initFirebaseAuth();
+    if (!window.firebase) throw new Error("Firebase SDK is not loaded");
 
-//     const provider = new firebase.auth.GithubAuthProvider();
-//     provider.addScope("user:email");
-//     const result = await firebase.auth().signInWithPopup(provider);
-//     await finishSocialLogin(result.user, "github");
-//   } catch (err) {
-//     showT(err.message || "GitHub login failed", "error");
-//   }
-// }
+    const provider = new firebase.auth.GithubAuthProvider();
+    provider.addScope("user:email");
+    const result = await firebase.auth().signInWithPopup(provider);
+    await finishSocialLogin(result.user, "github");
+  } catch (err) {
+    showT(err.message || "GitHub login failed", "error");
+  }
+}
 
 async function finishSocialLogin(firebaseUser, provider) {
   const res = await fetch(`${API_URL}/auth/social-login`, {
