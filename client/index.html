@@ -1,0 +1,1824 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Monastery360 - Sacred Monasteries of Sikkim</title>
+  <link rel="icon" href="./assets/favicon.ico" />
+  <!-- <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    ; -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="./assets/favicon-16x16.png" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Lato:wght@300;400;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap"
+    rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+  <script src="script.js" defer></script>
+</head>
+
+<body>
+
+
+  <!-- MOBILE MENU -->
+  <div class="mm" id="mmenu">
+    <button class="mmx" onclick="document.getElementById('mmenu').classList.remove('open')">
+      ✕
+    </button>
+    <a onclick="
+          cl();
+          ss('hero');
+        ">Home</a>
+    <a onclick="
+          cl();
+          ss('explore');
+        ">Explore</a>
+    <a onclick="
+          cl();
+          ss('about');
+        ">About</a>
+    <a onclick="
+          cl();
+          ss('tst');
+        ">Reviews</a>
+    <a onclick="
+          cl();
+          ss('payment');
+        ">Tours</a>
+    <a onclick="
+          cl();
+          ss('contact');
+        ">Contact</a>
+    <a onclick="
+          cl();
+          showA('login');
+        ">Login</a>
+  </div>
+
+  <!-- *** NAV BAR-->
+  <nav id="nb">
+    <div class="ni">
+      <a class="logo" href="#">☸ <span>Monastery</span><em style="color: var(--gold)">360</em></a>
+      <ul class="nl">
+        <li><a onclick="ss('hero')">Home</a></li>
+        <li><a onclick="ss('explore')">Explore</a></li>
+        <li><a onclick="ss('about')">About</a></li>
+        <li><a onclick="ss('tst')">Reviews</a></li>
+        <li><a onclick="ss('payment')">Tours</a></li>
+        <li><a onclick="ss('contact')">Contact</a></li>
+      </ul>
+      <div class="na">
+        <button class="theme-toggle" onclick="toggleThemeDrawer()" title="Theme settings">
+          <span class="sun">☀</span><span class="moon">☾</span>
+        </button>
+        <button class="cms-quick" id="cmsQuickBtn" onclick="openAdmCms()" style="display: none">
+          CMS
+        </button>
+        <span class="nav-user" id="navUserName" style="display: none"></span>
+        <div class="ib" id="pBtn" style="display: none" onclick="showProf()" title="My Profile">
+          👤
+        </div>
+        <div class="ib" id="bBtn" style="display: none" onclick="showProf()" title="Bookmarks">
+          🔖
+        </div>
+        <div class="ib" id="aBtn" style="display: none" onclick="openAdm()" title="Admin Panel">
+          ⚙️
+        </div>
+        <a class="bp nb" id="lgBtn" onclick="showA('login')" style="cursor: pointer; font-size: 13px">Login</a>
+        <a class="bp nb" id="loBtn" style="display: none; cursor: pointer; font-size: 13px"
+          onclick="doLogout()">Logout</a>
+        <div id="hm" onclick="document.getElementById('mmenu').classList.toggle('open')">
+          <span></span><span></span><span></span>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <aside class="theme-drawer" id="themeDrawer">
+    <button class="drawer-close" onclick="toggleThemeDrawer()">×</button>
+    <span class="sl">Experience Mode</span>
+    <h3>Make it yours</h3>
+    <p>
+      Switch the site mood instantly. Admins and editors can save brand colors
+      from the CMS panel.
+    </p>
+    <div class="mode-grid">
+      <button onclick="setThemeMode('light')">Light</button>
+      <button onclick="setThemeMode('dark')">Dark</button>
+      <button onclick="setThemeMode('auto')">Auto</button>
+    </div>
+    <label>Gold Accent
+      <input type="color" id="accentPick" value="#c9a84c" onchange="previewAccent(this.value)" /></label>
+  </aside>
+
+  <!-- ** LANDING -->
+
+  <section id="landing" class="landing public-only">
+    <div class="land-orb orb-one"></div>
+    <div class="land-orb orb-two"></div>
+    <div class="land-copy rv">
+      <div class="hb">Sikkim Travel OS · Monastery360</div>
+      <h1 data-cms="landingTitle">
+        Discover sacred Sikkim with a living digital guide.
+      </h1>
+      <p data-cms="landingSubtitle">
+        Explore monasteries, plan guided tours, save favourites, and let your
+        team update every important page detail without touching code.
+      </p>
+      <div class="land-actions">
+        <button class="bp" onclick="showA('signup')">Get Started</button>
+        <button class="bo" onclick="continueGuest()">
+          Continue as Guest
+        </button>
+      </div>
+      <div class="trust-strip">
+        <span>16 sacred stops</span><span>4 regions</span><span>No-code CMS</span>
+      </div>
+    </div>
+    <div class="land-visual rv">
+      <div class="scene3d">
+        <div class="temple-card">
+          <div class="temple-roof"></div>
+          <div class="temple-body">
+            <span></span><span></span><span></span>
+          </div>
+          <div class="temple-base"></div>
+        </div>
+        <div class="prayer-ring ring-a"></div>
+        <div class="prayer-ring ring-b"></div>
+      </div>
+    </div>
+    <div class="auth-split rv">
+      <div class="auth-tabs">
+        <button class="act" onclick="switchLandingAuth('login', this)">
+          Login
+        </button>
+        <button onclick="switchLandingAuth('signup', this)">Signup</button>
+      </div>
+      <div id="landLogin">
+        <input class="ai" id="lemHero" type="email" placeholder="Email address" />
+        <input class="ai" id="lpwHero" type="password" placeholder="Password" />
+        <button class="ab" onclick="doLandingLogin()">Enter dashboard</button>
+      </div>
+      <div id="landSignup" style="display: none">
+        <input class="ai" id="snmHero" placeholder="Full name" />
+        <input class="ai" id="semHero" type="email" placeholder="Email address" />
+        <input class="ai" id="spwHero" type="password" placeholder="Create password" />
+        <input class="ai" id="sphHero" type="tel" placeholder="Mobile number (+91...)" />
+        <button class="ab" onclick="doLandingSignup()">Create account</button>
+      </div>
+      <button class="social-login-btn github-login-btn" onclick="startGithubLogin()">
+        <i class="fab fa-github"></i>
+        Continue with GitHub
+      </button>
+      <button class="social-login-btn google-btn land-google" onclick="startGoogleLogin()">
+        <img src="https://developers.google.com/identity/images/g-logo.png" alt="" />
+        Continue with Google
+      </button>
+      <button class="guest-btn" onclick="continueGuest()">
+        Guest user · no registration required
+      </button>
+    </div>
+    <div class="landing-extra">
+      <article class="glass-feature">
+        <span>01</span>
+        <h3>Plan Sacred Routes</h3>
+        <p>
+          Animated guides, monastery cards, and quick tour booking for
+          travellers.
+        </p>
+      </article>
+      <article class="glass-feature">
+        <span>02</span>
+        <h3>CMS Powered</h3>
+        <p>
+          Admins can change hero text, carousel images, brand colors, and
+          permissions.
+        </p>
+      </article>
+      <article class="glass-feature">
+        <span>03</span>
+        <h3>Secure Access</h3>
+        <p>JWT, Google OAuth, OTP signup, and protected dashboard flow.</p>
+      </article>
+      <form class="landing-contact" onsubmit="submitLandingContact(event)">
+        <h3>Ask our Sikkim team</h3>
+        <input class="ai" id="lcName" placeholder="Your name" />
+        <input class="ai" id="lcEmail" type="email" placeholder="Email address" />
+        <textarea class="ai" id="lcMessage" placeholder="Message"></textarea>
+        <button class="ab" type="submit">Send Contact Email</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- *** HERO section -->
+
+
+  <section id="hero">
+    <div class="hbg"></div>
+    <div class="hc">
+      <div class="hb">☸ &nbsp;Sacred Sikkim · Digital Heritage</div>
+      <h1 class="ht">
+        Explore the <em>Sacred</em><br />Monasteries of Sikkim
+      </h1>
+      <p class="hs">
+        Journey through centuries of Tibetan Buddhist heritage, ancient prayer
+        halls, and living spiritual traditions nestled in the Himalayas.
+      </p>
+      <div class="hbts">
+        <button class="bp" onclick="ss('explore')">✦ Start Exploring</button>
+        <button class="bo" onclick="ss('payment')">📖 Book a Tour</button>
+      </div>
+      <div class="hst">
+        <div>
+          <div class="n">16</div>
+          <div class="l">Monasteries</div>
+        </div>
+        <div>
+          <div class="n">4</div>
+          <div class="l">Regions</div>
+        </div>
+        <div>
+          <div class="n">500+</div>
+          <div class="l">Years History</div>
+        </div>
+        <div>
+          <div class="n">12K+</div>
+          <div class="l">Visitors</div>
+        </div>
+      </div>
+    </div>
+    <div class="hscr"><span></span></div>
+  </section>
+  <!--  *** PAYMENT SECTION-->
+
+
+  <!-- *** MONASTERY CAROUSEL -->
+
+
+  <section class="mon-carousel rv" aria-label="Featured monastery gallery">
+    <div class="car-head">
+      <div>
+        <div class="sl">Featured Gallery</div>
+        <h2 class="st">A Moving Window Into Sikkim</h2>
+      </div>
+      <p class="ss">
+        Sixteen sacred places, shifting every two seconds with soft cinematic
+        motion.
+      </p>
+    </div>
+
+    <div class="car-shell" id="monCarousel">
+      <div class="car-track">
+        <figure class="car-slide active">
+          <img src="./img/pemayangtse-monastery1.jpg" alt="Pemayangtse Monastery" />
+          <figcaption>Pemayangtse Monastery</figcaption>
+        </figure>
+        <figure class="car-slide">
+          <img src="./img/enchy_monastery2.jpeg" alt="Enchey Monastery" />
+          <figcaption>Enchey Monastery</figcaption>
+        </figure>
+        <figure class="car-slide">
+          <img src="./img/3228827Gangtok_Tsuk_La_Khang_Main3.jpg" alt="Tsuk La Khang" />
+          <figcaption>Tsuk La Khang</figcaption>
+        </figure>
+        <figure class="car-slide">
+          <img src="./img/Tashiding Monastery44.jpg" alt="Tashiding Monastery" />
+          <figcaption>Tashiding Monastery</figcaption>
+        </figure>
+        <figure class="car-slide">
+          <img src="./img/Ralang Monastery55.jpg" alt="Ralang Monastery" />
+          <figcaption>Ralang Monastery</figcaption>
+        </figure>
+        <figure class="car-slide">
+          <img src="./img/Do-drul Chorten6.webp" alt="Do-drul Chorten" />
+          <figcaption>Do-drul Chorten</figcaption>
+        </figure>
+        <figure class="car-slide">
+          <img src="./img/lingdum-monastery7.jpg" alt="Lingdum Monastery" />
+          <figcaption>Lingdum Monastery</figcaption>
+        </figure>
+        <figure class="car-slide">
+          <img src="./img/Yuksom Dubdi Monastery8.jpg" alt="Dubdi Monastery" />
+          <figcaption>Yuksom Dubdi Monastery</figcaption>
+        </figure>
+        <figure class="car-slide">
+          <img src="./img/Khecheopalri Monastery9.jpg" alt="Khecheopalri Monastery" />
+          <figcaption>Khecheopalri Monastery</figcaption>
+        </figure>
+        <figure class="car-slide">
+          <img src="./img/Namgyal Institute of Tibetology10.jpg" alt="Namgyal Institute of Tibetology" />
+          <figcaption>Namgyal Institute of Tibetology</figcaption>
+        </figure>
+        <figure class="car-slide">
+          <img src="./img/Sakyamuni Buddha Park, Ravangla11.jpg" alt="Sakyamuni Buddha Park" />
+          <figcaption>Sakyamuni Buddha Park</figcaption>
+        </figure>
+        <figure class="car-slide">
+          <img src="./img/Samdruptse, Namchi12.jpg" alt="Samdruptse Namchi" />
+          <figcaption>Samdruptse, Namchi</figcaption>
+        </figure>
+        <figure class="car-slide">
+          <img src="./img/Martam Monastery13.jpg" alt="Martam Monastery" />
+          <figcaption>Martam Monastery</figcaption>
+        </figure>
+        <figure class="car-slide">
+          <img src="./img/Kabi Lungchok Site Monastery14.jpg" alt="Kabi Lungchok Site" />
+          <figcaption>Kabi Lungchok Site</figcaption>
+        </figure>
+        <figure class="car-slide">
+          <img src="./img/Chungthang Gompa15.jpg" alt="Chungthang Gompa" />
+          <figcaption>Chungthang Gompa</figcaption>
+        </figure>
+        <figure class="car-slide">
+          <img src="./img/Rinchenpong Monastery16.jpg" alt="Rinchenpong Monastery" />
+          <figcaption>Rinchenpong Monastery</figcaption>
+        </figure>
+      </div>
+
+      <button class="car-btn prev" type="button" onclick="moveMonCarousel(-1)">
+        &#8592;
+      </button>
+      <button class="car-btn next" type="button" onclick="moveMonCarousel(1)">
+        &#8594;
+      </button>
+      <div class="car-dots" id="monCarouselDots"></div>
+    </div>
+  </section>
+
+  <!-- EXPLORE -->
+  <section id="explore">
+    <div class="rv">
+      <div class="sl">✦ Our Collection</div>
+      <h2 class="st">Discover Sacred Monasteries</h2>
+      <p class="ss">
+        Forty ancient sanctuaries spread across the four regions of Sikkim,
+        each with its own centuries-old history and devotion.
+      </p>
+    </div>
+    <div class="rgc rv">
+      <div class="rgcd act" onclick="frg('All', this)">
+        <div class="ico">🏔️</div>
+        <div class="nm">All Regions</div>
+        <div class="ct" id="cA">16 Monasteries</div>
+      </div>
+      <div class="rgcd" onclick="frg('East', this)">
+        <div class="ico">🌅</div>
+        <div class="nm">East Sikkim</div>
+        <div class="ct" id="cE">— Monasteries</div>
+      </div>
+      <div class="rgcd" onclick="frg('West', this)">
+        <div class="ico">🌄</div>
+        <div class="nm">West Sikkim</div>
+        <div class="ct" id="cW">— Monasteries</div>
+      </div>
+      <div class="rgcd" onclick="frg('North', this)">
+        <div class="ico">❄️</div>
+        <div class="nm">North Sikkim</div>
+        <div class="ct" id="cN">— Monasteries</div>
+      </div>
+      <div class="rgcd" onclick="frg('South', this)">
+        <div class="ico">🌿</div>
+        <div class="nm">South Sikkim</div>
+        <div class="ct" id="cS">— Monasteries</div>
+      </div>
+    </div>
+    <div class="sfb rv">
+      <div class="sw">
+        <span class="si">🔍</span><input type="text" id="si2" placeholder="Search monasteries, history, regions…"
+          oninput="doS()" />
+      </div>
+      <div class="fb">
+        <button class="fbt act" onclick="sf('All', this)">All</button>
+        <button class="fbt" onclick="sf('East', this)">East</button>
+        <button class="fbt" onclick="sf('West', this)">West</button>
+        <button class="fbt" onclick="sf('North', this)">North</button>
+        <button class="fbt" onclick="sf('South', this)">South</button>
+      </div>
+    </div>
+    <div class="mg" id="mg"></div>
+  </section>
+
+  <!-- *** ABOUT -->
+  <section id="about">
+    <div class="ag">
+      <div class="ai rv">
+        <img src="https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=800&q=80" alt="Monastery interior"
+          loading="lazy" />
+      </div>
+      <div class="at rv">
+        <div class="sl">✦ Our Mission</div>
+        <h2 class="st">Preserving Sikkim's Living Heritage</h2>
+        <p class="ss">
+          Monastery360 digitizes, documents, and shares the sacred Buddhist
+          monasteries of Sikkim — preserving living heritage for future
+          generations.
+        </p>
+        <ul class="af">
+          <li>
+            Authentic historical records sourced from monastery archives and
+            scholars
+          </li>
+          <li>
+            High-resolution photography and immersive detail pages for all 40
+            sites
+          </li>
+          <li>Community-driven reviews from real pilgrims and travellers</li>
+          <li>
+            Curated guided tours and travel packages led by certified local
+            guides
+          </li>
+          <li>
+            Digital preservation initiative for Sikkim's intangible cultural
+            heritage
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- *** Image Gallery for Monasteries -->
+
+  <section id="gallery">
+    <div class="rv" style="text-align: center; margin-bottom: 46px">
+      <div class="sl" style="text-align: center">✦ Image Gallery</div>
+      <h2 class="st" style="text-align: center">
+        Monastery showcase : Explore Our Monasteries
+      </h2>
+      <h4 class="st">
+        A visual-first gallery for sacred architecture, routes, and
+        culture-rich storytelling. Designed for travellers seeking an
+        immersive preview of Sikkim's monasteries before they visit.
+      </h4>
+
+
+
+      <!-- ***  Photo gallary section where all photo updated and posted -->
+
+      <section class="photo-section">
+        <h2 class="photo-title">Explore Monastery Gallery 📸</h2>
+
+
+        <div class="photo-grid">
+
+          <!-- *** Top Images -->
+          <div class="photo-card"><img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=800&q=80"
+              alt="img"></div>
+          <div class="photo-card"><img src="./PhotoMonastery/monastery-01.jpg" alt="img"></div>
+          <div class="photo-card"><img src="./PhotoMonastery/monastery-02.jpg" alt="img"></div>
+          <div class="photo-card"><img src="./PhotoMonastery/monastery-03.jpg" alt="img"></div>
+          <div class="photo-card"><img src="./PhotoMonastery/monastery-04.jpg" alt="img"></div>
+          <div class="photo-card"><img src="./PhotoMonastery/monastery-05.jpg" alt="img"></div>
+          <div class="photo-card"><img src="./PhotoMonastery/monastery-06.jpg" alt="img"></div>
+          <div class="photo-card"><img src="./PhotoMonastery/monastery-07.jpg" alt="img"></div>
+          <div class="photo-card"><img src="./PhotoMonastery/monastery-08.jpg" alt="img"></div>
+          <div class="photo-card"><img src="./PhotoMonastery/monastery-09.jpg" alt="img"></div>
+          <div class="photo-card"><img src="./PhotoMonastery/monastery-10.jpg" alt="img"></div>
+          <div class="photo-card"><img src="./PhotoMonastery/monastery-11.jpg" alt="img"></div>
+          <div class="photo-card"><img src="./PhotoMonastery/monastery-12.jpg" alt="img"></div>
+          <div class="photo-card"><img src="./PhotoMonastery/monastery-13.jpg" alt="img"></div>
+          <div class="photo-card"><img src="./PhotoMonastery/monastery-14.jpg" alt="img"></div>
+          <div class="photo-card"><img src="./PhotoMonastery/monastery-15.jpg" alt="img"></div>
+          <div class="photo-card"><img src="./PhotoMonastery/monastery-16.jpg" alt="img"></div>
+          <div class="photo-card"><img src="./PhotoMonastery/photo17.webp" alt="img"></div>
+
+          <!-- *** Remaining Photos -->
+          <div class="photo-card"><img src="./PhotoMonastery/photo18.jpg" alt="img"></div>
+          <div class="photo-card"><img src="./PhotoMonastery/photo19.jpg" alt="img"></div>
+          <div class="photo-card"><img src="./PhotoMonastery/photo20.jpg" alt="img"></div>
+          <div class="photo-card"><img src="./PhotoMonastery/photo21.webp" alt="img"></div>
+          <div class="photo-card"><img src="./PhotoMonastery/photo23.jpg" alt="img"></div>
+          <div class="photo-card"><img src="./PhotoMonastery/photo24.jpg" alt="img"></div>
+          <div class="photo-card"><img src="./PhotoMonastery/photo25.jpg" alt="img"></div>
+          <div class="photo-card"><img src="./PhotoMonastery/photo26.jpg" alt="img"></div>
+          <div class="photo-card"><img src="./PhotoMonastery/photo27.jpg" alt="img"></div>
+          <div class="photo-card"><img src="./PhotoMonastery/photo28.jpg" alt="img"></div>
+          <div class="photo-card"><img src="./PhotoMonastery/photo29.jpg" alt="img"></div>
+          <div class="photo-card"><img src="./PhotoMonastery/photo30.jpg" alt="img"></div>
+          <div class="photo-card"><img src="./PhotoMonastery/photo31.jpg" alt="img"></div>
+          <div class="photo-card"><img src="./PhotoMonastery/photo32.jpg" alt="img"></div>
+          <div class="photo-card"><img src="./PhotoMonastery/photo33.jpg" alt="img"></div>
+          <div class="photo-card"><img src="./PhotoMonastery/photo34.jpg" alt="img"></div>
+          <div class="photo-card"><img src="./PhotoMonastery/photo35.jpg" alt="img"></div>
+          <div class="photo-card"><img src="./PhotoMonastery/photo36.jpg" alt="img"></div>
+          <div class="photo-card"><img src="./PhotoMonastery/photo37.jpg" alt="img"></div>
+          <div class="photo-card"><img src="./PhotoMonastery/photo38.jpg" alt="img"></div>
+          <div class="photo-card"><img src="./PhotoMonastery/photo39.jpg" alt="img"></div>
+          <div class="photo-card"><img src="./PhotoMonastery/photo40.jpg" alt="img"></div>
+
+          <!-- *** Copy New Remaining Photos -->
+
+          <div class="photo-card"><img src="./PhotoMonastery/photo18.jpg" alt="img"></div>
+          <div class="photo-card"><img src="./PhotoMonastery/photo19.jpg" alt="img"></div>
+          <div class="photo-card"><img src="./PhotoMonastery/photo20.jpg" alt="img"></div>
+          <div class="photo-card"><img src="./PhotoMonastery/photo21.webp" alt="img"></div>
+          <div class="photo-card"><img src="./PhotoMonastery/photo23.jpg" alt="img"></div>
+          <div class="photo-card"><img src="./PhotoMonastery/photo24.jpg" alt="img"></div>
+          <div class="photo-card"><img src="./PhotoMonastery/photo25.jpg" alt="img"></div>
+          <div class="photo-card"><img src="./PhotoMonastery/photo26.jpg" alt="img"></div>
+          <div class="photo-card"><img src="./PhotoMonastery/photo27.jpg" alt="img"></div>
+          <div class="photo-card"><img src="./PhotoMonastery/photo28.jpg" alt="img"></div>
+          <div class="photo-card"><img src="./PhotoMonastery/photo29.jpg" alt="img"></div>
+          <div class="photo-card"><img src="./PhotoMonastery/photo30.jpg" alt="img"></div>
+          <div class="photo-card"><img src="./PhotoMonastery/photo31.jpg" alt="img"></div>
+          <div class="photo-card"><img src="./PhotoMonastery/photo32.jpg" alt="img"></div>
+          <div class="photo-card"><img src="./PhotoMonastery/photo33.jpg" alt="img"></div>
+          <div class="photo-card"><img src="./PhotoMonastery/photo34.jpg" alt="img"></div>
+          <div class="photo-card"><img src="./PhotoMonastery/photo35.jpg" alt="img"></div>
+          <div class="photo-card"><img src="./PhotoMonastery/photo36.jpg" alt="img"></div>
+          <div class="photo-card"><img src="./PhotoMonastery/photo37.jpg" alt="img"></div>
+          <div class="photo-card"><img src="./PhotoMonastery/photo38.jpg" alt="img"></div>
+          <div class="photo-card"><img src="./PhotoMonastery/photo39.jpg" alt="img"></div>
+          <div class="photo-card"><img src="./PhotoMonastery/photo40.jpg" alt="img"></div>
+          <div class="photo-card"><img src="./PhotoMonastery/monastery-01.jpg" alt="img"></div>
+          <div class="photo-card"><img src="./PhotoMonastery/monastery-02.jpg" alt="img"></div>
+          <div class="photo-card"><img src="./PhotoMonastery/monastery-03.jpg" alt="img"></div>
+          <div class="photo-card"><img src="./PhotoMonastery/monastery-04.jpg" alt="img"></div>
+          <div class="photo-card"><img src="./PhotoMonastery/monastery-05.jpg" alt="img"></div>
+          <div class="photo-card"><img src="./PhotoMonastery/monastery-06.jpg" alt="img"></div>
+          <div class="photo-card"><img src="./PhotoMonastery/monastery-07.jpg" alt="img"></div>
+          <div class="photo-card"><img src="./PhotoMonastery/monastery-08.jpg" alt="img"></div>
+          <div class="photo-card"><img src="./PhotoMonastery/monastery-09.jpg" alt="img"></div>
+          <div class="photo-card"><img src="./PhotoMonastery/monastery-10.jpg" alt="img"></div>
+          <div class="photo-card"><img src="./PhotoMonastery/monastery-11.jpg" alt="img"></div>
+          <div class="photo-card"><img src="./PhotoMonastery/monastery-12.jpg" alt="img"></div>
+          <div class="photo-card"><img src="./PhotoMonastery/monastery-13.jpg" alt="img"></div>
+          <div class="photo-card"><img src="./PhotoMonastery/monastery-14.jpg" alt="img"></div>
+          <div class="photo-card"><img src="./PhotoMonastery/monastery-15.jpg" alt="img"></div>
+          <div class="photo-card"><img src="./PhotoMonastery/monastery-16.jpg" alt="img"></div>
+          <div class="photo-card"><img src="./PhotoMonastery/photo17.webp" alt="img"></div>
+
+          <!-- *** Monastery real New Remaining Photos -->
+
+          <div class="photo-card"><img src="./img/herosection/monasteryhero01.png" alt="img"></div>
+          <div class="photo-card"><img src="./img/herosection/monasteryhero02.png" alt="img"></div>
+          <div class="photo-card"><img src="./img/herosection/monasteryhero03.png" alt="img"></div>
+          <div class="photo-card"><img src="./img/herosection/monasteryhero04.png" alt="img"></div>
+          <div class="photo-card"><img src="./img/3228827Gangtok_Tsuk_La_Khang_Main3.jpg" alt="img"></div>
+          <div class="photo-card"><img src="./img/BonMonastery15.jpeg" alt="img"></div>
+          <div class="photo-card"><img src="./img/Chungthang Gompa15.jpg" alt="img"></div>
+          <div class="photo-card"><img src="./img/Do-drul Chorten6.webp" alt="img"></div>
+          <div class="photo-card"><img src="./img/Do-ngak_Choling.jpg" alt="img"></div>
+          <div class="photo-card"><img src="./img/dzongritrek.webp" alt="img"></div>
+          <div class="photo-card"><img src="./img/doling_monastery.jpg" alt="img"></div>
+          <div class="photo-card"><img src="./img/enchy_monastery2.jpeg" alt="img"></div>
+          <div class="photo-card"><img src="./img/Gurdwara_Dongmaar.webp" alt="img"></div>
+          <div class="photo-card"><img src="./img/Kabi Lungchok Site Monastery14.jpg" alt="img"></div>
+          <div class="photo-card"><img src="./img/kagyu.webp" alt="img"></div>
+          <div class="photo-card"><img src="./img/Khecheopalri Monastery9.jpg" alt="img"></div>
+          <div class="photo-card"><img src="./img/kongrimonastery.webp" alt="img"></div>
+          <div class="photo-card"><img src="./img/labrang_monastery.jpg" alt="img"></div>
+          <div class="photo-card"><img src="./img/lachen_monastery.jpg" alt="img"></div>
+          <div class="photo-card"><img src="./img/lachung_monastery.jpg" alt="img"></div>
+          <div class="photo-card"><img src="./img/lingdum-monastery7.jpg" alt="img"></div>
+          <div class="photo-card"><img src="./img/Martam Monastery13.jpg" alt="img"></div>
+          <div class="photo-card"><img src="./img/Namgyal Institute of Tibetology10.jpg" alt="img"></div>
+          <div class="photo-card"><img src="./img/ngorewamchoden_monastery.jpg" alt="img"></div>
+          <div class="photo-card"><img src="./img/pemayangtse-monastery1.jpg" alt="img"></div>
+          <div class="photo-card"><img src="./img/phasang_monastery.jpg" alt="img"></div>
+          <div class="photo-card"><img src="./img/phodong_monastery.jpg" alt="img"></div>
+          <div class="photo-card"><img src="./img/Ralang Monastery55.jpg" alt="img"></div>
+          <div class="photo-card"><img src="./img/Ralong_monastery.jpg" alt="img"></div>
+          <div class="photo-card"><img src="./img/Rinchenpong Monastery16.jpg" alt="img"></div>
+          <div class="photo-card"><img src="./img/rumtek_monastery.jpg" alt="img"></div>
+          <div class="photo-card"><img src="./img/Sakyamuni Buddha Park, Ravangla11.jpg" alt="img"></div>
+          <div class="photo-card"><img src="./img/Samdruptse, Namchi12.jpg" alt="img"></div>
+          <div class="photo-card"><img src="./img/sangacholing_monastery.jpeg" alt="img"></div>
+          <div class="photo-card"><img src="./img/sangchendorjee_monastery.jpg" alt="img"></div>
+          <div class="photo-card"><img src="./img/Sinon Monastery.webp" alt="img"></div>
+          <div class="photo-card"><img src="./img/solophok-chardhM.jpg" alt="img"></div>
+          <div class="photo-card"><img src="./img/spiti_P1556.webp" alt="img"></div>
+          <div class="photo-card"><img src="./img/Tashiding Monastery44.jpg" alt="img"></div>
+          <div class="photo-card"><img src="./img/temi_monastery.jpg" alt="img"></div>
+          <div class="photo-card"><img src="./img/Tendong_monastery.jpg" alt="img"></div>
+          <div class="photo-card"><img src="./img/tharpacholing_monastery.jpg" alt="img"></div>
+          <div class="photo-card"><img src="./img/TholungGonpa.jpg" alt="img"></div>
+          <div class="photo-card"><img src="./img/Yuksom Dubdi Monastery8.jpg" alt="img"></div>
+          <div class="photo-card"><img src="./img/BonMonastery15.jpeg" alt="img"></div>
+          <div class="photo-card"><img src="./PhotoMonastery/monastery-05.jpg" alt="img"></div>
+          <div class="photo-card"><img src="./img/lingdum-monastery7.jpg" alt="img"></div>
+        </div>
+      </section>
+
+
+      <!-- *** VIDEO -->
+      <!-- <h3 class="video-title" >Monastery tour video sikkim exploration</h3> -->
+      <section class="video-section">
+        <div class="container">
+          <h2>🎥 Featured Video</h2>
+          <h5>Experience the beauty and peace of monasteries</h5>
+          <br />
+
+          <div class="video-wrapper">
+            <iframe src="https://www.youtube.com/embed/rvmEz9RiDZ8" title="YouTube video" frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen>
+            </iframe>
+          </div>
+        </div>
+        <div class="video-text">
+          <p class="quote-en">
+            "In the silence of the mountains, the soul finds its true voice."
+          </p>
+
+          <p class="quote-hi">
+            "पहाड़ों की शांति में आत्मा अपनी सच्ची आवाज़ पाती है।"
+          </p>
+
+          <p class="para-en">
+            This video captures the serene beauty of monasteries where nature and spirituality become one.
+            Surrounded by mountains, flowing water, and peaceful energy, it invites you to pause, breathe,
+            and reconnect with yourself beyond the noise of everyday life.
+          </p>
+
+          <p class="para-hi">
+            यह वीडियो मठों की उस शांत सुंदरता को दर्शाता है जहाँ प्रकृति और आध्यात्मिकता एक हो जाते हैं।
+            पहाड़ों, बहते जल और सकारात्मक ऊर्जा के बीच, यह आपको ठहरने, सांस लेने और खुद से जुड़ने का अनुभव देता है।
+          </p>
+        </div>
+      </section>
+
+      <!-- *** second video section -->
+      <section class="video-section-two">
+        <div class="container">
+
+          <h2>Discover the Soul of Sikkim 🌄</h2>
+
+          <div class="video-wrapper">
+            <iframe src="https://www.youtube.com/embed/P_78Wc3OXB8" title="Sikkim Travel Video" frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen>
+            </iframe>
+          </div>
+
+          <div class="video-text">
+            <p class="quote-en">
+              "Every journey into the mountains is a step closer to your inner peace."
+            </p>
+
+            <p class="quote-hi">
+              "पहाड़ों की हर यात्रा आपको अपने भीतर की शांति के और करीब ले जाती है।"
+            </p>
+
+            <p class="para-en">
+              This video takes you through the mesmerizing landscapes of Sikkim, where every valley, monastery,
+              and flowing stream tells a story of peace and harmony. It is not just a destination, but a feeling
+              that calms the mind and awakens the spirit within.
+            </p>
+
+            <p class="para-hi">
+              यह वीडियो आपको सिक्किम की अद्भुत वादियों में ले जाता है, जहाँ हर पहाड़, मठ और बहती धारा
+              शांति और संतुलन की कहानी कहती है। यह सिर्फ एक जगह नहीं, बल्कि एक एहसास है जो मन को शांत
+              और आत्मा को जागृत करता है।
+            </p>
+
+          </div>
+
+        </div>
+      </section>
+
+      <!-- *** third video exploration sikkim section -->
+      <section class="video-section-three">
+        <div class="container">
+
+          <h2>Feel the Divine Journey 🕊️</h2>
+
+          <div class="video-wrapper">
+            <iframe src="https://www.youtube.com/embed/vpzNyL3UyNg" title="Spiritual Monastery Journey" frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen>
+            </iframe>
+          </div>
+
+          <div class="video-text">
+
+            <p class="quote-en">
+              "Peace is not found in places, it is discovered within the journey."
+            </p>
+
+            <p class="quote-hi">
+              "शांति कहीं बाहर नहीं मिलती, यह यात्रा के भीतर महसूस होती है।"
+            </p>
+
+            <p class="para-en">
+              This video beautifully captures the spiritual essence of monasteries, where every moment feels calm,
+              every breath feels lighter, and every view touches the soul. It’s not just a visual experience,
+              but a journey that inspires mindfulness, inner peace, and connection with nature.
+            </p>
+
+            <p class="para-hi">
+              यह वीडियो मठों की आध्यात्मिक सुंदरता को दर्शाता है, जहाँ हर पल सुकून भरा होता है,
+              हर सांस हल्की लगती है और हर दृश्य आत्मा को छू जाता है। यह सिर्फ एक दृश्य अनुभव नहीं,
+              बल्कि एक ऐसी यात्रा है जो आपको ध्यान, शांति और प्रकृति से जोड़ती है।
+            </p>
+
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ***fourth video sikkim exploration guide section -->
+      <section class="video-section-four">
+        <div class="container">
+
+          <h2>Awaken Your Inner Peace 🌿</h2>
+
+          <div class="video-wrapper">
+            <iframe src="https://www.youtube.com/embed/ADubSccPgJI" title="Monastery Peace Video" frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen>
+            </iframe>
+          </div>
+
+          <div class="video-text">
+
+            <p class="quote-en">
+              "In the heart of silence, the universe whispers its deepest truths."
+            </p>
+
+            <p class="quote-hi">
+              "खामोशी के भीतर ही ब्रह्मांड अपनी गहरी सच्चाइयाँ सुनाता है।"
+            </p>
+
+            <p class="para-en">
+              This video invites you into a world where time slows down and peace takes over.
+              Surrounded by nature and spiritual energy, every frame reflects calmness, balance,
+              and a deep connection with the soul. It’s not just something you watch,
+              it’s something you feel within.
+            </p>
+
+            <p class="para-hi">
+              यह वीडियो आपको एक ऐसी दुनिया में ले जाता है जहाँ समय धीमा हो जाता है और शांति चारों ओर फैल जाती है।
+              प्रकृति और आध्यात्मिक ऊर्जा के बीच, हर दृश्य संतुलन, सुकून और आत्मा से गहरे जुड़ाव को दर्शाता है।
+              यह सिर्फ देखने का अनुभव नहीं, बल्कि महसूस करने की यात्रा है।
+            </p>
+
+          </div>
+
+        </div>
+      </section>
+
+      <!-- *** fifth video section for sikkim monastery tour guide experience -->
+
+      <section class="video-section-five">
+        <div class="container">
+
+          <h2>Journey Beyond the Horizon ✨</h2>
+
+          <div class="video-wrapper">
+            <iframe src="https://www.youtube.com/embed/-CxXztE-r9k" title="Spiritual Travel Experience" frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen>
+            </iframe>
+          </div>
+
+          <div class="video-text">
+
+            <p class="quote-en">
+              "Some journeys are not meant to reach a place, but to discover a feeling."
+            </p>
+
+            <p class="quote-hi">
+              "कुछ यात्राएँ मंज़िल तक पहुँचने के लिए नहीं, बल्कि एक एहसास को पाने के लिए होती हैं।"
+            </p>
+
+            <p class="para-en">
+              This video captures the magic of travel where nature, culture, and spirituality blend into one.
+              Every scene reflects a story of calmness, exploration, and deeper understanding of life.
+              It’s an experience that stays with you long after the journey ends.
+            </p>
+
+            <p class="para-hi">
+              यह वीडियो यात्रा की उस खूबसूरती को दर्शाता है जहाँ प्रकृति, संस्कृति और आध्यात्मिकता एक साथ मिलती हैं।
+              हर दृश्य शांति, खोज और जीवन की गहराई को समझने की कहानी कहता है।
+              यह एक ऐसा अनुभव है जो यात्रा खत्म होने के बाद भी आपके साथ बना रहता है।
+            </p>
+
+          </div>
+
+        </div>
+      </section>
+
+      <!-- *** sixth video section for sikkim monastery tour guide experience -->
+      <section class="video-section-six">
+        <div class="container">
+
+          <h2>Echoes of Serenity 🌌</h2>
+
+          <div class="video-wrapper">
+            <iframe src="https://www.youtube.com/embed/4YBZbszFYX0" title="North Sikkim Travel Experience"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen>
+            </iframe>
+          </div>
+
+          <div class="video-text">
+
+            <p class="quote-en">
+              "Nature speaks in silence, and only a calm heart can truly hear it."
+            </p>
+
+            <p class="quote-hi">
+              "प्रकृति खामोशी में बात करती है, और केवल शांत मन ही उसे सुन सकता है।"
+            </p>
+
+            <p class="para-en">
+              This video showcases the breathtaking beauty of North Sikkim, where untouched landscapes,
+              flowing rivers, and majestic mountains create a perfect harmony of nature. It takes you into
+              a world far away from noise, where peace becomes a natural feeling and every moment feels pure.
+            </p>
+
+            <p class="para-hi">
+              यह वीडियो नॉर्थ सिक्किम की अद्भुत सुंदरता को दर्शाता है, जहाँ अनछुई प्रकृति, बहती नदियाँ
+              और ऊँचे पहाड़ एक अद्भुत संतुलन बनाते हैं। यह आपको शोर से दूर एक ऐसी दुनिया में ले जाता है
+              जहाँ शांति एक स्वाभाविक अनुभव बन जाती है और हर पल पवित्र महसूस होता है।
+            </p>
+
+          </div>
+
+        </div>
+      </section>
+
+      <!-- *** seventh video section for sikkim monastery tour guide experience -->
+
+      <section class="video-section-seven">
+        <div class="container">
+
+          <h2>Timeless Silence ⚫⚪</h2>
+
+          <div class="video-wrapper">
+            <iframe src="https://www.youtube.com/embed/PaUvcKB-QDM" title="Monastery Cinematic Experience"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen>
+            </iframe>
+          </div>
+
+          <div class="video-text">
+
+            <p class="quote-en">
+              "In stillness, we find the depth of life beyond words."
+            </p>
+
+            <p class="quote-hi">
+              "शांति में हम जीवन की गहराई को शब्दों से परे महसूस करते हैं।"
+            </p>
+
+            <p class="para-en">
+              This video reflects a minimal yet powerful journey into the heart of silence.
+              With monochrome beauty and deep contrasts, it captures the essence of calmness,
+              focus, and inner awareness. Every frame feels like a pause from the chaos of the world.
+            </p>
+
+            <p class="para-hi">
+              यह वीडियो एक सरल लेकिन प्रभावशाली यात्रा को दर्शाता है, जहाँ शांति का असली अनुभव मिलता है।
+              काले और सफेद रंगों की सुंदरता के साथ, यह ध्यान, संतुलन और आंतरिक जागरूकता को दर्शाता है।
+              हर दृश्य मानो दुनिया की भागदौड़ से एक ठहराव जैसा महसूस होता है।
+            </p>
+
+          </div>
+
+        </div>
+      </section>
+
+      <!--  ***Eight video section for sikkim monastery tour guide experience -->
+
+      <section class="video-section-eight">
+        <div class="container">
+
+          <h2>Waves of Peace 🌅</h2>
+
+          <div class="video-wrapper">
+            <iframe src="https://www.youtube.com/embed/-Vqot8MJMMg" title="Peaceful Monastery Journey" frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen>
+            </iframe>
+          </div>
+
+          <div class="video-text">
+
+            <p class="quote-en">
+              "As the sun sets, the mind finds a quiet place to rest."
+            </p>
+
+            <p class="quote-hi">
+              "जैसे ही सूरज ढलता है, मन को सुकून का एक शांत स्थान मिल जाता है।"
+            </p>
+
+            <p class="para-en">
+              This video captures the magical calmness of sunset in the mountains, where golden light touches
+              every corner of nature. The peaceful environment, flowing air, and spiritual atmosphere create
+              a feeling of deep relaxation and inner balance.
+            </p>
+
+            <p class="para-hi">
+              यह वीडियो पहाड़ों में सूर्यास्त की अद्भुत शांति को दर्शाता है, जहाँ सुनहरी रोशनी
+              प्रकृति के हर कोने को छूती है। शांत वातावरण, बहती हवा और आध्यात्मिक ऊर्जा
+              एक गहरा सुकून और संतुलन का अनुभव कराते हैं।
+            </p>
+
+          </div>
+
+        </div>
+      </section>
+
+      <!-- *** Ninth video section for sikkim monastery tour guide experience -->
+
+      <section class="video-section-nine">
+        <div class="container">
+
+          <h2>Midnight Tranquility 🌌</h2>
+
+          <div class="video-wrapper">
+            <iframe src="https://www.youtube.com/embed/4HbYh8yCNnQ" title="Himalayan Monastery Night Experience"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen>
+            </iframe>
+          </div>
+
+          <div class="video-text">
+
+            <p class="quote-en">
+              "Under the silent sky, the heart learns to listen."
+            </p>
+
+            <p class="quote-hi">
+              "खामोश आसमान के नीचे, दिल सुनना सीख जाता है।"
+            </p>
+
+            <p class="para-en">
+              This video reveals the quiet magic of the mountains at night, where stars shimmer above
+              and the world slows to a gentle rhythm. The calm atmosphere, distant winds, and sacred
+              surroundings create a deep sense of stillness that refreshes the mind and spirit.
+            </p>
+
+            <p class="para-hi">
+              यह वीडियो रात के समय पहाड़ों की शांत जादुई दुनिया को दर्शाता है, जहाँ सितारे चमकते हैं
+              और जीवन एक धीमी लय में बहता है। शांत वातावरण और पवित्र ऊर्जा मन और आत्मा को नई ताजगी देते हैं।
+            </p>
+
+          </div>
+
+        </div>
+      </section>
+
+      <!-- *** Tenth video section for sikkim monastery tour guide experience -->
+
+      <section class="video-section-ten">
+        <div class="container">
+
+          <h2>Explore the Soul of Sikkim 🏔️</h2>
+
+          <div class="video-wrapper">
+            <iframe src="https://www.youtube.com/embed/eBWe_ujl25I" title="Sikkim Silk Route & Monastery Journey"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen>
+            </iframe>
+          </div>
+
+          <div class="video-text">
+
+            <p class="quote-en">
+              "Sikkim is not just a destination, it is a feeling where mountains whisper peace to your soul."
+            </p>
+
+            <p class="quote-hi">
+              "सिक्किम सिर्फ एक जगह नहीं, बल्कि एक एहसास है जहाँ पहाड़ आपकी आत्मा से शांति की बात करते हैं।"
+            </p>
+
+            <p class="para-en">
+              This video takes you on a breathtaking journey through the hidden beauty of Sikkim, exploring
+              its iconic Silk Route, peaceful monasteries, and untouched landscapes. From winding mountain roads
+              to the serene presence of Buddhist gompas, every moment reveals a deeper connection between nature
+              and spirituality. Sikkim is known for its rich heritage of monasteries, where monks practice ancient
+              traditions and meditation in complete harmony with nature. :contentReference[oaicite:0]{index=0}
+            </p>
+
+            <p class="para-en">
+              As you watch, you will feel the calm winds, see the prayer flags dancing in the sky, and experience
+              the silent strength of the Himalayas. Monasteries here are not just architectural wonders but spiritual
+              centers that guide people toward peace, mindfulness, and inner awakening. Places like ancient monasteries
+              built centuries ago still preserve deep cultural and religious significance, connecting the past with the
+              present. :contentReference[oaicite:1]{index=1}
+            </p>
+
+            <p class="para-hi">
+              यह वीडियो आपको सिक्किम की अद्भुत यात्रा पर ले जाता है, जहाँ सिल्क रूट की घुमावदार सड़कें,
+              शांत मठ और अनछुई प्रकृति एक अनोखा अनुभव प्रदान करते हैं। यहाँ के मठ केवल इमारतें नहीं हैं,
+              बल्कि आध्यात्मिक केंद्र हैं जहाँ भिक्षु ध्यान और प्राचीन परंपराओं का पालन करते हैं।
+            </p>
+
+            <p class="para-hi">
+              जब आप इस वीडियो को देखते हैं, तो आपको ठंडी हवाओं का एहसास होता है, प्रार्थना के झंडों की
+              लहराती ध्वनि सुनाई देती है और हिमालय की शांत शक्ति का अनुभव होता है। सिक्किम की यह यात्रा
+              सिर्फ देखने के लिए नहीं, बल्कि महसूस करने के लिए है — एक ऐसी शांति जो आपके मन और आत्मा को
+              गहराई से छू जाती है।
+            </p>
+
+          </div>
+
+        </div>
+      </section>
+
+      <!-- *** Eleventh video section for sikkim monastery tour guide experience -->
+
+      <section class="video-section-eleven">
+        <div class="container">
+
+          <h2>Rumtek Monastery • A Sacred Journey 🏯</h2>
+
+          <div class="video-wrapper">
+            <iframe src="https://www.youtube.com/embed/vocqDzfHIKw" title="Rumtek Monastery Gangtok Sikkim Sightseeing"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen>
+            </iframe>
+          </div>
+
+          <div class="video-text">
+
+            <p class="quote-en">
+              "Where faith meets the mountains, every step becomes a spiritual journey."
+            </p>
+
+            <p class="quote-hi">
+              "जहाँ आस्था पहाड़ों से मिलती है, वहाँ हर कदम एक आध्यात्मिक यात्रा बन जाता है।"
+            </p>
+
+            <p class="para-en">
+              This video takes you to the magnificent Rumtek Monastery in Gangtok, one of the most
+              significant spiritual centers in Sikkim. Surrounded by lush hills and peaceful landscapes,
+              the monastery reflects deep-rooted Buddhist traditions, vibrant culture, and a sense of
+              divine calmness that touches every visitor.
+            </p>
+
+            <p class="para-en">
+              As you explore Rumtek, you witness beautiful architecture, sacred rituals, and the presence
+              of monks devoted to meditation and learning. The serene environment and rhythmic chants
+              create a powerful connection between mind, body, and soul — making it not just a destination,
+              but a life-changing experience.
+            </p>
+
+            <p class="para-hi">
+              यह वीडियो आपको गंगटोक के प्रसिद्ध रूमटेक मठ की यात्रा पर ले जाता है, जो सिक्किम के सबसे
+              महत्वपूर्ण आध्यात्मिक केंद्रों में से एक है। हरे-भरे पहाड़ों और शांत वातावरण के बीच स्थित
+              यह मठ बौद्ध संस्कृति, परंपरा और शांति का प्रतीक है।
+            </p>
+
+            <p class="para-hi">
+              यहाँ आप सुंदर वास्तुकला, पवित्र अनुष्ठान और ध्यान में लीन भिक्षुओं को देख सकते हैं।
+              मठ का शांत वातावरण और मंत्रों की ध्वनि मन, शरीर और आत्मा को जोड़ती है — यह केवल एक
+              यात्रा नहीं, बल्कि एक गहरा अनुभव है।
+            </p>
+
+          </div>
+
+        </div>
+      </section>
+
+      <!-- *** Now here is reel section for sikkim monastery tour guide experience -->
+
+      <!-- *** short video section for sikkim monastery tour guide experience -->
+
+      <section class="shorts-section">
+        <h2 class="shorts-title">Monastery Reels 🎥</h2>
+
+        <div class="shorts-container">
+
+          <!-- SHORT CARD -->
+          <div class="short-card">
+            <iframe src="https://www.youtube.com/embed/A85Qkt_thyo" allowfullscreen></iframe>
+          </div>
+
+          <div class="short-card">
+            <iframe src="https://www.youtube.com/embed/CwA65VpdpoI" allowfullscreen></iframe>
+          </div>
+
+          <div class="short-card">
+            <iframe src="https://www.youtube.com/embed/afh5du83c78" allowfullscreen></iframe>
+          </div>
+
+          <div class="short-card">
+            <iframe src="https://www.youtube.com/embed/O_EQA5Zv05s" allowfullscreen></iframe>
+          </div>
+
+          <div class="short-card">
+            <iframe src="https://www.youtube.com/embed/faoxcc-YrPA" allowfullscreen></iframe>
+          </div>
+
+          <div class="short-card">
+            <iframe src="https://www.youtube.com/embed/2IHWL_EDQGM" allowfullscreen></iframe>
+          </div>
+
+          <!-- *** second row of reels -->
+
+          <div class="short-card">
+            <iframe src="https://www.youtube.com/embed/A85Qkt_thyo" allowfullscreen></iframe>
+          </div>
+
+          <div class="short-card">
+            <iframe src="https://www.youtube.com/embed/CwA65VpdpoI" allowfullscreen></iframe>
+          </div>
+
+          <div class="short-card">
+            <iframe src="https://www.youtube.com/embed/afh5du83c78" allowfullscreen></iframe>
+          </div>
+
+          <div class="short-card">
+            <iframe src="https://www.youtube.com/embed/O_EQA5Zv05s" allowfullscreen></iframe>
+          </div>
+
+          <div class="short-card">
+            <iframe src="https://www.youtube.com/embed/faoxcc-YrPA" allowfullscreen></iframe>
+          </div>
+
+          <div class="short-card">
+            <iframe src="https://www.youtube.com/embed/2IHWL_EDQGM" allowfullscreen></iframe>
+          </div>
+
+          <!-- *** third row of reels -->
+
+          <div class="short-card">
+            <iframe src="https://www.youtube.com/embed/A85Qkt_thyo" allowfullscreen></iframe>
+          </div>
+
+          <div class="short-card">
+            <iframe src="https://www.youtube.com/embed/CwA65VpdpoI" allowfullscreen></iframe>
+          </div>
+
+          <div class="short-card">
+            <iframe src="https://www.youtube.com/embed/afh5du83c78" allowfullscreen></iframe>
+          </div>
+
+          <div class="short-card">
+            <iframe src="https://www.youtube.com/embed/O_EQA5Zv05s" allowfullscreen></iframe>
+          </div>
+
+          <div class="short-card">
+            <iframe src="https://www.youtube.com/embed/faoxcc-YrPA" allowfullscreen></iframe>
+          </div>
+
+          <div class="short-card">
+            <iframe src="https://www.youtube.com/embed/2IHWL_EDQGM" allowfullscreen></iframe>
+          </div>
+
+          <!-- *** fourth row of reels -->
+
+          <div class="short-card">
+            <iframe src="https://www.youtube.com/embed/A85Qkt_thyo" allowfullscreen></iframe>
+          </div>
+
+          <div class="short-card">
+            <iframe src="https://www.youtube.com/embed/CwA65VpdpoI" allowfullscreen></iframe>
+          </div>
+
+          <div class="short-card">
+            <iframe src="https://www.youtube.com/embed/afh5du83c78" allowfullscreen></iframe>
+          </div>
+
+          <div class="short-card">
+            <iframe src="https://www.youtube.com/embed/O_EQA5Zv05s" allowfullscreen></iframe>
+          </div>
+
+          <div class="short-card">
+            <iframe src="https://www.youtube.com/embed/faoxcc-YrPA" allowfullscreen></iframe>
+          </div>
+
+          <div class="short-card">
+            <iframe src="https://www.youtube.com/embed/2IHWL_EDQGM" allowfullscreen></iframe>
+          </div>
+
+          <!-- *** fifth row of reels -->
+
+          <div class="short-card">
+            <iframe src="https://www.youtube.com/embed/A85Qkt_thyo" allowfullscreen></iframe>
+          </div>
+
+          <div class="short-card">
+            <iframe src="https://www.youtube.com/embed/CwA65VpdpoI" allowfullscreen></iframe>
+          </div>
+
+          <div class="short-card">
+            <iframe src="https://www.youtube.com/embed/afh5du83c78" allowfullscreen></iframe>
+          </div>
+
+          <div class="short-card">
+            <iframe src="https://www.youtube.com/embed/O_EQA5Zv05s" allowfullscreen></iframe>
+          </div>
+
+          <div class="short-card">
+            <iframe src="https://www.youtube.com/embed/faoxcc-YrPA" allowfullscreen></iframe>
+          </div>
+
+          <div class="short-card">
+            <iframe src="https://www.youtube.com/embed/2IHWL_EDQGM" allowfullscreen></iframe>
+          </div>
+
+
+
+          <!-- 👉 Add your 30 videos like this -->
+
+        </div>
+      </section>
+      <!-- *** TESTIMONIALS -->
+      <section id="tst" style="border-radius: 50px; margin-top: 20px; background-color: rgb(0, 0, 54);">
+        <div class="rv" style="text-align: center; margin-bottom: 46px">
+          <div class="sl" style="text-align: center">✦ ✪ Traveller Stories</div>
+          <h2 class="st" style="text-align: center">What Visitors Say</h2>
+        </div>
+        <div class="tc rv">
+          <div class="ttr" id="ttr"></div>
+          <div class="tdt" id="tdt"></div>
+          <div class="tar">
+            <button onclick="movT(-1)">←</button><button onclick="movT(1)">→</button>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- *** PAYMENT / TOURS -->
+      <section id="payment" style="border-radius: 50px; margin-top: 20px;">
+        <div class="rv" style="text-align: center; margin-bottom: 46px">
+          <div class="sl" style="text-align: center">✦ Guided Experiences</div>
+          <h2 class="st" style="text-align: center">Book Your Monastery Tour</h2>
+          <p class="ss" style="text-align: center; margin: 0 auto 0">
+            Choose from curated travel packages and guided experiences led by
+            certified local guides.
+          </p>
+        </div>
+        <div class="pg rv" id="pgrid"></div>
+      </section>
+
+      <!-- *** CONTACT -->
+      <section id="contact" style="border-radius: 25px; background-color: rgb(0, 0, 54);">
+        <div class="rv">
+          <div class="sl">✦ Get in Touch</div>
+          <h2 class="st">Contact Us</h2>
+          <p class="ss" style="text-align: center; margin: 0 auto 0; margin-bottom: 5px;">
+            Have questions about your visit? Our local Gangtok team is ready to
+            help plan your pilgrimage.
+          </p>
+        </div>
+        <div class="cg rv">
+          <div>
+            <div class="cit">
+              <div class="cico" style="margin-top: 25px;">📍</div>
+              <div class="ctx" style="margin-bottom: 25px;">
+                <h4>Location</h4>
+                <p>MG Marg, Gangtok, East Sikkim<br />Sikkim – 737101, India</p>
+              </div>
+            </div>
+            <div class="cit">
+              <div class="cico">📞</div>
+              <div class="ctx">
+                <h4>Phone</h4>
+                <p>+91 9142620172<br />+91 98320 45678</p>
+              </div>
+            </div>
+            <div class="cit">
+              <div class="cico">✉️</div>
+              <div class="ctx">
+                <h4>Email</h4>
+                <p>udayroytech@gmail.com<br />tours@monastery360.in</p>
+                -->
+              </div>
+            </div>
+            <div class="cit">
+              <div class="cico">⏰</div>
+              <div class="ctx">
+                <h4>Office Hours</h4>
+                <p>Mon–Sat: 9 AM – 6 PM IST<br />Sunday: 10 AM – 2 PM IST</p>
+              </div>
+            </div>
+          </div>
+          <div class="cfm">
+            <h3 style="
+              font-family: &quot;Cinzel&quot;, serif;
+              color: var(--gold);
+              font-size: 17px;
+              margin-bottom: 20px;
+            ">
+              Send a Message
+            </h3>
+            <div class="cro">
+              <input class="cin" id="cn" placeholder="Your Name" /><input class="cin" id="ce"
+                placeholder="Email Address" />
+            </div>
+            <input class="cin" id="cs" placeholder="Subject" />
+            <textarea class="cin ta" id="cm" placeholder="Your message…"></textarea>
+            <button class="csb" onclick="subCon()">Send Message ✦</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- **** FOOTER -->
+      <footer class="footer" style="margin-bottom: 0px; border-radius: 50px; margin-top: 20px;">
+        <div class="fg">
+          <div class="fb2">
+            <a class="logo">☸ <span>Monastery</span><em style="color: var(--gold)">360</em></a>
+            <p>
+              Digitizing and sharing the sacred Tibetan Buddhist heritage of
+              Sikkim — one monastery at a time. Built with devotion.
+            </p>
+            <div class="fsc">
+              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">f</a>
+              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">in</a>
+              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">x</a>
+              <a href="https://youtube.com" target="_blank" rel="noopener noreferrer">yt</a>
+            </div>
+          </div>
+          <div class="fc">
+            <h4>Explore</h4>
+
+            <ul>
+              <li><a onclick="ss('explore')">All Monasteries</a></li>
+              <li><a onclick="frg2('East')">East Sikkim</a></li>
+              <li><a onclick="frg2('West')">West Sikkim</a></li>
+              <li><a onclick="frg2('North')">North Sikkim</a></li>
+              <li><a onclick="frg2('South')">South Sikkim</a></li>
+            </ul>
+          </div>
+          <div class="fc">
+            <h4>Tours</h4>
+
+            <ul>
+              <li><a onclick="ss('payment')">Day Tour</a></li>
+              <li><a onclick="ss('payment')">Heritage Circuit</a></li>
+              <li><a onclick="ss('payment')">Pilgrimage Trail</a></li>
+              <li><a onclick="ss('payment')">Photography Tour</a></li>
+            </ul>
+          </div>
+          <div class="fc">
+            <h4>Account</h4>
+            <ul>
+              <li><a onclick="showA('login')">Login</a></li>
+              <li><a onclick="showA('signup')">Register</a></li>
+              <li><a onclick="showProf()">My Profile</a></li>
+              <li><a onclick="ss('contact')">Contact</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="fbt2">
+          <span>© 2026 Monastery360. All rights reserved. Built with ☸ in
+            Sikkim.</span><span>Privacy · Terms · Sitemap</span>
+        </div>
+      </footer>
+
+      <button id="bt" onclick="window.scrollTo({ top: 0, behavior: 'smooth' })">
+        ↑
+      </button>
+      <div class="toast" id="toast"></div>
+      <aside class="ai-assistant" id="aiAssistant" aria-label="Monastery tour assistant">
+        <button class="ai-fab" type="button" onclick="toggleAiAssistant()" title="Tour assistant">
+          <i class="fa-solid fa-wand-magic-sparkles"></i>
+        </button>
+        <div class="ai-panel" id="aiPanel">
+          <div class="ai-head">
+            <div>
+              <span>Monastery360 AI</span>
+              <strong>Tour Assistant</strong>
+            </div>
+            <button type="button" onclick="toggleAiAssistant()" title="Close assistant">
+              <i class="fa-solid fa-xmark"></i>
+            </button>
+          </div>
+          <div class="ai-suggestions">
+            <button type="button" onclick="askAiSuggestion('best east monasteries')">East route</button>
+            <button type="button" onclick="askAiSuggestion('tour prices')">Tour prices</button>
+            <button type="button" onclick="askAiSuggestion('best photography tour')">Photography</button>
+          </div>
+          <div class="ai-messages" id="aiMessages">
+            <div class="ai-msg bot">
+              Ask me about monasteries, regions, timings, tour packages, booking, payment, or what to visit first.
+            </div>
+          </div>
+          <form class="ai-form" onsubmit="askAiAssistant(event)">
+            <input id="aiQuestion" autocomplete="off" placeholder="Ask about a monastery or tour..." />
+            <button type="submit" title="Ask">
+              <i class="fa-solid fa-paper-plane"></i>
+            </button>
+          </form>
+        </div>
+      </aside>
+
+      <!-- AUTH MODAL -->
+      <div class="ov" id="authOv" onclick="cio(event, 'authOv')">
+        <div class="am">
+          <div class="alo">
+            <span>Monastery<em>360</em></span>
+          </div>
+          <h2 class="ati" id="ati">Welcome Back</h2>
+          <p class="asu" id="asu">Login to explore sacred monasteries</p>
+          <div class="ae" id="aerr"></div>
+          <div id="lf">
+            <input class="ai" type="email" id="lem" placeholder="Email Address" />
+            <input class="ai" type="password" id="lpw" placeholder="Password" />
+            <button class="ab" onclick="doLogin()">Login</button>
+            <div class="adiv">or</div>
+            <!-- <button
+            class="gb"
+            onclick="window.location.href = 'http://localhost:5000/auth/google'"
+          >
+            🇬 Continue with Google
+          </button> -->
+            <button class="social-login-btn github-login-btn" onclick="startGithubLogin()">
+              <i class="fab fa-github"></i>
+              Continue with GitHub
+            </button>
+            <button class="social-login-btn google-btn" onclick="startGoogleLogin()">
+              <img src="https://developers.google.com/identity/images/g-logo.png" />
+              Continue with Google
+            </button>
+
+            <div class="asw">
+              No account?
+              <a onclick="showA('signup')">Sign up free</a> &nbsp;·&nbsp;
+              <a onclick="showA('admin')">Admin</a>
+            </div>
+          </div>
+          <div id="sf2" style="display: none">
+            <input class="ai" type="text" id="snm" placeholder="Full Name" />
+            <input class="ai" type="email" id="sem" placeholder="Email Address" />
+            <input class="ai" type="password" id="spw" placeholder="Password (min 6 chars)" />
+            <input class="ai" type="tel" id="sph" placeholder="Mobile Number with country code (+91...)" />
+            <button class="ab" onclick="doSignup()">Create Account</button>
+            <div class="asw">
+              Already a member? <a onclick="showA('login')">Login here</a>
+            </div>
+          </div>
+          <div id="adf" style="display: none">
+            <input class="ai" type="text" id="admu" placeholder="Admin Username" />
+            <input class="ai" type="password" id="admp" placeholder="Admin Password" />
+            <button class="ab" onclick="doAdm()">Admin Login</button>
+            <div class="asw"><a onclick="showA('login')">← Back to Login</a></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- OTP MODAL -->
+      <div class="ov" id="otpOv" onclick="cio(event, 'otpOv')">
+        <div class="am">
+          <div class="alo">
+            <span>Verify<em> OTP</em></span>
+          </div>
+          <h2 class="ati">Verify Email & Mobile</h2>
+          <p class="asu" id="otpHint">
+            Enter both 6-digit OTPs. They expire in 5 minutes.
+          </p>
+          <div class="ae" id="otpErr"></div>
+          <input class="ai otp-input" id="emailOtpCode" maxlength="6" inputmode="numeric" placeholder="Email OTP" />
+          <input class="ai otp-input" id="mobileOtpCode" maxlength="6" inputmode="numeric" placeholder="Mobile OTP" />
+          <button class="ab" onclick="verifySignupOtp()">
+            Verify & Continue
+          </button>
+          <button class="gb" id="otpResendBtn" onclick="requestSignupOtp()" disabled>
+            Resend OTP in 60s
+          </button>
+        </div>
+      </div>
+
+      <!-- DETAIL MODAL -->
+      <div class="ov" id="dtOv" onclick="cio(event, 'dtOv')">
+        <div class="mb">
+          <div class="mhr">
+            <img id="dI" src="" alt="" />
+            <div class="mho"></div>
+            <button class="mcl" onclick="cm('dtOv')">✕</button>
+            <div class="mhi">
+              <h2 id="dN"></h2>
+              <p><span id="dRg"></span> · <span id="dYr"></span></p>
+            </div>
+          </div>
+          <div class="mbd">
+            <div class="mts">
+              <div class="mta act" onclick="swT('ov', this)">Overview</div>
+              <div class="mta" onclick="swT('hs', this)">History</div>
+              <div class="mta" onclick="swT('vi', this)">Visitor Info</div>
+              <div class="mta" onclick="swT('rv', this)">Reviews</div>
+            </div>
+            <div class="mtc act" id="tc-ov">
+              <div class="ig" id="dIG"></div>
+              <p id="dSD" style="
+                font-family: &quot;Cormorant Garamond&quot;, serif;
+                font-size: 18px;
+                line-height: 1.82;
+                color: #555;
+                font-style: italic;
+              "></p>
+            </div>
+            <div class="mtc" id="tc-hs">
+              <p class="mht" id="dHs"></p>
+            </div>
+            <div class="mtc" id="tc-vi">
+              <div class="ig" id="dVG"></div>
+              <div class="mpm">
+                <iframe id="dMp" loading="lazy" src=""></iframe>
+              </div>
+            </div>
+            <div class="mtc" id="tc-rv">
+              <div class="rvf">
+                <h4>Write a Review</h4>
+                <div class="strs" id="sts">
+                  <span onclick="setSt(1)">★</span><span onclick="setSt(2)">★</span>
+                  <span onclick="setSt(3)">★</span><span onclick="setSt(4)">★</span><span onclick="setSt(5)">★</span>
+                </div>
+                <textarea id="rvtx" placeholder="Share your experience visiting this monastery…"></textarea>
+                <button class="bs" style="margin-top: 9px" onclick="subRv()">
+                  Post Review
+                </button>
+              </div>
+              <div class="rvl" id="rvl"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PAYMENT MODAL -->
+      <div class="ov" id="payOv" onclick="cio(event, 'payOv')">
+        <div class="pm">
+          <div style="
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 18px;
+          ">
+            <h3 style="
+              font-family: &quot;Cinzel&quot;, serif;
+              font-size: 17px;
+              color: var(--deep);
+            " id="ptit">
+              Book Tour
+            </h3>
+            <button onclick="cm('payOv')" style="
+              background: none;
+              border: none;
+              font-size: 21px;
+              cursor: pointer;
+              color: #aaa;
+            ">
+              ✕
+            </button>
+          </div>
+          <div class="ps" id="psum"></div>
+          <div style="display: flex; gap: 7px; margin-bottom: 13px; font-size: 21px">
+            💳 🏦 📱
+          </div>
+          <input type="text" class="inp" id="pynm" placeholder="Full Name" />
+          <input type="email" class="inp" id="pyem" placeholder="Email Address" />
+          <input type="tel" class="inp" id="pyph" placeholder="Phone Number (+91…)" />
+          <input type="text" class="inp" id="pydt" placeholder="Preferred Tour Date (DD/MM/YYYY)" />
+          <div class="pr">
+            <input type="number" class="inp" id="pygs" placeholder="No. of Guests" min="1" style="margin-bottom: 0" />
+            <select class="inp" id="pymth" style="margin-bottom: 0">
+              <option value="">Payment Method</option>
+              <option>UPI (GPay / PhonePe)</option>
+              <option>Net Banking</option>
+              <option>Credit / Debit Card</option>
+              <option>Pay at Location</option>
+            </select>
+          </div>
+          <input type="text" class="inp" id="pyup" placeholder="UPI ID or Card No. (optional)"
+            style="margin-top: 13px" />
+          <button class="pbt" onclick="processRazorpayPayment()">Confirm &amp; Pay Now ✦</button>
+        </div>
+      </div>
+
+      <!-- PROFILE PANEL -->
+      <div id="prP">
+        <div class="prb">
+          <button onclick="closeProf()" style="
+            position: absolute;
+            top: 18px;
+            right: 18px;
+            background: none;
+            border: none;
+            font-size: 21px;
+            cursor: pointer;
+            color: #aaa;
+          ">
+            ✕
+          </button>
+          <div class="prh">
+            <div class="prav" id="prav">U</div>
+            <div class="prnm" id="prnm">User</div>
+            <div class="prem" id="prem">user@email.com</div>
+          </div>
+          <div class="prsg">
+            <div class="prss">
+              <div class="n" id="pbmc">0</div>
+              <div class="l">Bookmarks</div>
+            </div>
+            <div class="prss">
+              <div class="n" id="prvc">0</div>
+              <div class="l">Reviews</div>
+            </div>
+            <div class="prss">
+              <div class="n" id="pvsc">0</div>
+              <div class="l">Visited</div>
+            </div>
+          </div>
+          <div class="prsc">
+            <h3>Profile Settings</h3>
+            <div class="profile-tools">
+              <input class="inp" id="prEditName" placeholder="Display name" />
+              <input class="inp" id="prEditEmail" placeholder="Email" />
+              <input class="inp" id="prEditPass" type="password" placeholder="New password (optional)" />
+              <button class="bs" onclick="saveProfileSettings()">
+                Save Profile
+              </button>
+              <button class="bs ghost" onclick="doLogout()">Logout</button>
+            </div>
+            <h3>My Bookmarked Monasteries</h3>
+            <div style="
+              display: grid;
+              grid-template-columns: repeat(auto-fill, minmax(185px, 1fr));
+              gap: 13px;
+            " id="bmg"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ADMIN PANEL -->
+      <div id="adP">
+        <div class="asd">
+          <div class="asd-l">
+            <strong>Monastery360</strong><small>Admin Panel</small>
+          </div>
+          <nav>
+            <a class="act" onclick="sas('dash', this)">📊 Dashboard</a>
+            <a onclick="sas('mons', this)">🏯 Monasteries</a>
+            <a onclick="sas('usrs', this)">👥 Users</a>
+            <a onclick="sas('bkgs', this)">📅 Bookings</a>
+            <a onclick="sas('revs', this)">⭐ Reviews</a>
+            <a onclick="sas('msgs', this)">✉️ Messages</a>
+            <a class="exit" onclick="closeAdm()">← Exit Panel</a>
+          </nav>
+        </div>
+        <div class="am2">
+          <div class="ahd">
+            <h1 id="adtl">Dashboard</h1>
+            <div class="admin-actions">
+              <button class="bs" onclick="sas('cms', this)">CMS Studio</button>
+              <button class="bs" onclick="sas('power', this)">User Power</button>
+              <button class="bs" onclick="closeAdm()">Exit Admin</button>
+            </div>
+          </div>
+          <div class="asec act" id="as-dash">
+            <div class="asg" id="asc"></div>
+            <div class="atbl">
+              <h3>Recent Bookings</h3>
+              <table>
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Tour</th>
+                    <th>Date</th>
+                    <th>Guests</th>
+                    <th>Amount</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody id="arbt"></tbody>
+              </table>
+            </div>
+          </div>
+          <div class="asec" id="as-mons">
+            <div class="atbl">
+              <h3>All Monasteries (40)</h3>
+              <table>
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Region</th>
+                    <th>Year Built</th>
+                    <th>Sect</th>
+                    <th>Rating</th>
+                  </tr>
+                </thead>
+                <tbody id="amtb"></tbody>
+              </table>
+            </div>
+          </div>
+          <div class="asec" id="as-usrs">
+            <div class="atbl">
+              <h3>Registered Users</h3>
+              <table>
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Bookmarks</th>
+                    <th>Reviews</th>
+                    <th>Joined</th>
+                  </tr>
+                </thead>
+                <tbody id="autb"></tbody>
+              </table>
+            </div>
+          </div>
+          <div class="asec" id="as-bkgs">
+            <div class="atbl">
+              <h3>All Bookings</h3>
+              <table>
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Tour</th>
+                    <th>Date</th>
+                    <th>Guests</th>
+                    <th>Amount</th>
+                    <th>Method</th>
+                  </tr>
+                </thead>
+                <tbody id="abtb"></tbody>
+              </table>
+            </div>
+          </div>
+          <div class="asec" id="as-revs">
+            <div class="atbl">
+              <h3>All Reviews</h3>
+              <table>
+                <thead>
+                  <tr>
+                    <th>User</th>
+                    <th>Stars</th>
+                    <th>Comment</th>
+                    <th>Date</th>
+                  </tr>
+                </thead>
+                <tbody id="artb"></tbody>
+              </table>
+            </div>
+          </div>
+          <div class="asec" id="as-msgs">
+            <div class="atbl">
+              <h3>Contact Messages</h3>
+              <table>
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Subject</th>
+                    <th>Message</th>
+                  </tr>
+                </thead>
+                <tbody id="amsg"></tbody>
+              </table>
+            </div>
+          </div>
+          <div class="asec" id="as-cms">
+            <div class="cms-grid">
+              <div class="atbl">
+                <h3>No-Code Website Editor</h3>
+                <label>Landing Title</label>
+                <textarea class="cms-input" id="cmsLandingTitle"></textarea>
+                <label>Landing Subtitle</label>
+                <textarea class="cms-input" id="cmsLandingSubtitle"></textarea>
+                <label>Hero Badge</label>
+                <input class="cms-input" id="cmsHeroBadge" />
+                <label>Hero Title</label>
+                <textarea class="cms-input" id="cmsHeroTitle"></textarea>
+                <label>Hero Subtitle</label>
+                <textarea class="cms-input" id="cmsHeroSubtitle"></textarea>
+                <label>Primary Color</label>
+                <input class="cms-input" id="cmsGold" type="color" />
+                <label>Deep Color</label>
+                <input class="cms-input" id="cmsDeep" type="color" />
+                <button class="pbt" onclick="saveCmsContent()">
+                  Save Website Changes
+                </button>
+              </div>
+              <div class="atbl">
+                <h3>Carousel Image Manager</h3>
+                <p class="cms-help">
+                  Paste image URLs or local paths like ./img/name.jpg. Captions
+                  are editable too.
+                </p>
+                <div id="cmsCarouselList"></div>
+                <button class="bs" onclick="resetCmsContent()">Reset CMS</button>
+              </div>
+            </div>
+          </div>
+          <div class="asec" id="as-power">
+            <div class="atbl">
+              <h3>User Permissions</h3>
+              <p class="cms-help">
+                Give trusted users editor power so they can update website text,
+                colors, and carousel images without coding.
+              </p>
+              <div id="powerList"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+</body>
+
+</html>
