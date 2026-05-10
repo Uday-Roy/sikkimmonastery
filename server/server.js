@@ -91,6 +91,38 @@ app.get(
   },
 );
 
+// GitHub OAuth login setup
+app.get(
+  "/auth/github",
+  passport.authenticate("github", {
+    scope: ["user:email"],
+  }),
+);
+
+app.get(
+  "/auth/github/callback",
+  passport.authenticate("github", {
+    session: false,
+  }),
+
+  (req, res) => {
+    const token = jwt.sign({ id: req.user._id }, process.env.JWT_SECRET, {
+      expiresIn: "7d",
+    });
+
+    const qs = new URLSearchParams({
+      token,
+      name: req.user.name || "GitHub User",
+      email: req.user.email || "",
+      role: req.user.role || "user",
+    });
+
+    res.redirect(
+      `https://sikkimmonastery.vercel.app/index.html?${qs.toString()}`,
+    );
+  },
+);
+
 // Error handling middleware
 app.use((err, req, res, next) => {
   console.error("❌ Error:", err.message);

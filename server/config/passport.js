@@ -1,6 +1,7 @@
 const passport = require("passport");
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const User = require("../models/User");
+const GitHubStrategy = require("passport-github2").Strategy;
 
 passport.use(
   new GoogleStrategy(
@@ -25,5 +26,40 @@ passport.use(
       done(null, user);
     },
   ),
+
+  // GitHub OAuth strategy (optional)
+  passport.use(
+    new GitHubStrategy(
+      {
+        clientID: process.env.GITHUB_CLIENT_ID,
+        clientSecret: process.env.GITHUB_CLIENT_SECRET,
+        callbackURL:
+          "https://sikkimmonastery.onrender.com/auth/github/callback",
+      },
+
+      async (accessToken, refreshToken, profile, done) => {
+        try {
+          const User = require("../models/User");
+
+          let user = await User.findOne({
+            email: profile.emails?.[0]?.value,
+          });
+
+          if (!user) {
+            user = await User.create({
+              name: profile.displayName || profile.username,
+              email: profile.emails?.[0]?.value,
+              password: "github-login",
+            });
+          }
+
+          done(null, user);
+        } catch (err) {
+          done(err, null);
+        }
+      },
+    ),
+  ),
 );
+
 module.exports = passport;
