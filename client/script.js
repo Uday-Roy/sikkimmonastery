@@ -1204,7 +1204,8 @@ let CUR_FILTER = "All",
   PENDING_SIGNUP = null,
   OTP_TIMER = null;
 
-const API_URL = "https://sikkimmonastery.onrender.com/api";
+//const API_URL = "https://sikkimmonastery.onrender.com/api";
+const API_URL = "https://sikkimmonastery-api.udayroy.in/api";
 
 const FIREBASE_CONFIG = {
   apiKey: "AIzaSyAy99E3DU7Gv9pcILQEG4vtGTWTz_aqhpg",
@@ -1557,11 +1558,13 @@ async function continueGuest() {
   );
 }
 function startGithubLogin() {
-  window.location.href = "https://sikkimmonastery.onrender.com/auth/github";
+  // window.location.href = "https://sikkimmonastery.onrender.com/auth/github";
+  window.location.href = "https://sikkimmonastery-api.udayroy.in/auth/github";
 }
 
 function startGoogleLogin() {
-  window.location.href = "https://sikkimmonastery.onrender.com/auth/google";
+  //window.location.href = "https://sikkimmonastery.onrender.com/auth/google";
+  window.location.href = "https://sikkimmonastery-api.udayroy.in/auth/google";
 }
 
 // async function startGithubLogin() {

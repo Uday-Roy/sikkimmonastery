@@ -199,7 +199,9 @@ passport.use(
 
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
 
-      callbackURL: "https://sikkimmonastery.onrender.com/auth/google/callback",
+      // callbackURL: "https://sikkimmonastery.onrender.com/auth/google/callback",
+      callbackURL:
+        "https://sikkimmonastery-api.udayroy.in/auth/google/callback",
     },
 
     async (accessToken, refreshToken, profile, done) => {
@@ -240,7 +242,9 @@ passport.use(
 
       clientSecret: process.env.GITHUB_CLIENT_SECRET,
 
-      callbackURL: "https://sikkimmonastery.onrender.com/auth/github/callback",
+      // callbackURL: "https://sikkimmonastery.onrender.com/auth/github/callback",
+      callbackURL:
+        "https://sikkimmonastery-api.udayroy.in/auth/github/callback",
 
       scope: ["user:email", "read:user"],
     },
