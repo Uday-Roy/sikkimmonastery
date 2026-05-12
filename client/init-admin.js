@@ -91,7 +91,8 @@ async function initializeAdmin() {
     console.log("✨ Admin initialization complete!\n");
     console.log("🚀 Next steps:");
     console.log(
-      `   1. Login to admin panel at: https://sikkimmonastery.vercel.app/admin.html`,
+      //  `   1. Login to admin panel at: https://sikkimmonastery.vercel.app/admin.html`,
+      `   1. Login to admin panel at: https://sikkimmonastery.udayroy.in/admin.html`,
     );
     console.log(`   2. Email: ${ADMIN_EMAIL}`);
     console.log(`   3. Password: ${ADMIN_PASSWORD}`);

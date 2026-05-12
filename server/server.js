@@ -12,7 +12,9 @@ const app = express();
 // app.use(cors());
 app.use(
   cors({
-    origin: "https://sikkimmonastery.vercel.app",
+    //origin: "https://sikkimmonastery.vercel.app",
+    origin: "https://sikkimmonastery.udayroy.in",
+
     credentials: true,
   }),
 );
@@ -85,7 +87,7 @@ app.get(
       role: req.user.role || "user",
     });
     res.redirect(
-      `https://sikkimmonastery.vercel.app/index.html?${qs.toString()}`,
+      `https://sikkimmonastery.udayroy.in/index.html?${qs.toString()}`,
     );
     //res.redirect(`http://127.0.0.1:5500/client/index.html?${qs.toString()}`);
   },
@@ -118,7 +120,7 @@ app.get(
     });
 
     res.redirect(
-      `https://sikkimmonastery.vercel.app/index.html?${qs.toString()}`,
+      `https://sikkimmonastery.udayroy.in/index.html?${qs.toString()}`,
     );
   },
 );
