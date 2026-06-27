@@ -2743,6 +2743,164 @@ color:#fb7185;
         </div>
       </aside>
 
+      ```html
+<!-- ================= PREMIUM FLOATING TOUR GUIDE ================= -->
+<!-- Paste just after <body> -->
+
+<section style="
+position:fixed;
+left:0;
+top:50%;
+transform:translateY(-50%);
+z-index:999999;
+font-family:'Poppins',Arial,sans-serif;
+">
+
+<div style="
+display:flex;
+align-items:center;
+transition:.45s;
+">
+
+<!-- Vertical Tab -->
+<div id="guideTab"
+
+onmouseenter="
+document.getElementById('guideCard').style.left='18px';
+document.getElementById('guideCard').style.opacity='1';
+"
+
+style="
+writing-mode:vertical-rl;
+transform:rotate(180deg);
+background:linear-gradient(180deg,#0F5132,#166534,#22C55E);
+color:white;
+padding:22px 12px;
+font-size:13px;
+font-weight:700;
+letter-spacing:3px;
+border-radius:0 18px 18px 0;
+cursor:pointer;
+box-shadow:0 20px 50px rgba(0,0,0,.35);
+">
+
+DISCOVER SIKKIM
+
+</div>
+
+
+
+<!-- Floating Card -->
+<div
+id="guideCard"
+
+onmouseleave="
+this.style.left='-380px';
+this.style.opacity='0';
+"
+
+style="
+position:absolute;
+left:-380px;
+top:50%;
+transform:translateY(-50%);
+width:340px;
+background:linear-gradient(145deg,#05281D,#0A3B2B,#14532D);
+border-radius:0 28px 28px 0;
+padding:35px;
+transition:.45s;
+opacity:0;
+box-shadow:0 30px 80px rgba(0,0,0,.45);
+border:1px solid rgba(255,255,255,.08);
+backdrop-filter:blur(25px);
+">
+
+<div style="
+font-size:13px;
+letter-spacing:2px;
+color:#7EE7B8;
+font-weight:700;
+text-transform:uppercase;
+margin-bottom:15px;
+">
+
+Monastery360 Guide
+
+</div>
+
+
+<h2 style="
+margin:0;
+color:white;
+font-size:34px;
+line-height:1.2;
+font-weight:800;
+">
+
+Discover the Spirit of Sikkim
+
+</h2>
+
+
+<p style="
+margin-top:20px;
+color:#E2F9F0;
+font-size:15px;
+line-height:1.9;
+">
+
+Step into a land where ancient Buddhist monasteries, snow-covered Himalayan peaks, peaceful forests, crystal-clear rivers and vibrant mountain culture come together to create an unforgettable journey.
+
+Whether you're seeking spiritual peace, breathtaking landscapes or authentic local experiences, Sikkim offers a destination unlike anywhere else.
+
+</p>
+
+
+<div style="
+margin-top:25px;
+padding:16px 20px;
+background:rgba(255,255,255,.08);
+border-left:4px solid #4ADE80;
+border-radius:14px;
+color:white;
+font-size:14px;
+line-height:1.8;
+">
+
+<b>Travel Tip</b><br>
+
+Visit monasteries early in the morning to witness peaceful prayers, mountain sunrise and the authentic rhythm of Buddhist life.
+
+</div>
+
+
+
+<a href="#about"
+
+style="
+display:inline-block;
+margin-top:28px;
+padding:16px 28px;
+background:linear-gradient(90deg,#22C55E,#06B6D4);
+color:white;
+text-decoration:none;
+font-weight:700;
+border-radius:50px;
+box-shadow:0 12px 35px rgba(34,197,94,.3);
+">
+
+Explore Heritage →
+
+</a>
+
+</div>
+
+</div>
+
+</section>
+```
+
+
       <!-- AUTH MODAL -->
       <div class="ov" id="authOv" onclick="cio(event, 'authOv')">
         <div class="am">
