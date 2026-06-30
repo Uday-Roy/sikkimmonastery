@@ -21,179 +21,98 @@
   <script src="script.js" defer></script>
   <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 </head>
-<!-- ================= FLOATING WHATSAPP & CALL CTA ================= -->
+ <!-- ================= PREMIUM FLOATING CONTACT CTA ================= -->
 
-<div style="
+    <section style="
 position:fixed;
-left:22px;
+left:20px;
 top:50%;
 transform:translateY(-50%);
+z-index:999999;
+font-family:'Poppins',sans-serif;
+margin-top: 260px;
+margin-left: -20px;
+">
+
+        <div style="
 display:flex;
 flex-direction:column;
-gap:18px;
-z-index:999999;
-font-family:Arial,sans-serif;
+gap:14px;
 ">
 
-<!-- WHATSAPP -->
-<a href="https://wa.me/919142620172"
-target="_blank"
-style="
-display:flex;
-align-items:center;
-gap:15px;
-text-decoration:none;
+            <!-- WhatsApp -->
+
+            <a href="https://wa.me/919142620172" target="_blank" title="Chat on WhatsApp" style="
+width:65px;
+height:65px;
+border-radius:50%;
 background:linear-gradient(135deg,#25D366,#128C7E);
-padding:18px 22px;
-border-radius:70px;
-color:white;
-font-weight:800;
-box-shadow:0 15px 45px rgba(37,211,102,.45);
-transition:.35s;
-">
-
-<div style="
-width:58px;
-height:58px;
-border-radius:50%;
-background:rgba(255,255,255,.15);
 display:flex;
 align-items:center;
 justify-content:center;
-font-size:30px;
-backdrop-filter:blur(10px);
-">
-
-💬
-
-</div>
-
-<div>
-
-<div style="
-font-size:12px;
-letter-spacing:1px;
-opacity:.8;
-">
-
-CHAT NOW
-
-</div>
-
-<div style="
-font-size:18px;
-">
-
-WhatsApp
-
-</div>
-
-</div>
-
-</a>
-
-
-
-
-
-<!-- PHONE -->
-<a href="tel:+919142620172"
-style="
-display:flex;
-align-items:center;
-gap:15px;
 text-decoration:none;
-background:linear-gradient(135deg,#2563EB,#06B6D4);
-padding:18px 22px;
-border-radius:70px;
-color:white;
-font-weight:800;
-box-shadow:0 15px 45px rgba(37,99,235,.45);
+box-shadow:0 15px 35px rgba(37,211,102,.45);
 transition:.35s;
+position:relative;
 ">
 
-<div style="
-width:58px;
-height:58px;
+                <span style="font-size:30px;">💬</span>
+
+                <!-- <span style="
+position:absolute;
+left:78px;
+white-space:nowrap;
+background:#fff;
+padding:10px 18px;
+border-radius:40px;
+font-size:14px;
+font-weight:700;
+color:#111;
+box-shadow:0 10px 30px rgba(0,0,0,.18);
+">
+                    WhatsApp Us
+                </span> -->
+
+            </a>
+
+            <!-- Phone -->
+
+            <a href="tel:+919142620172" title="Call Now" style="
+width:65px;
+height:65px;
 border-radius:50%;
-background:rgba(255,255,255,.15);
+background:linear-gradient(135deg,#1F2937,#000);
 display:flex;
 align-items:center;
 justify-content:center;
-font-size:28px;
-backdrop-filter:blur(10px);
-">
-
-📞
-
-</div>
-
-<div>
-
-<div style="
-font-size:12px;
-letter-spacing:1px;
-opacity:.8;
-">
-
-CALL NOW
-
-</div>
-
-<div style="
-font-size:18px;
-">
-
-+91 9142620172
-
-</div>
-
-</div>
-
-</a>
-
-</div>
-
-
-
-
-
-<!-- Floating Animation -->
-<style>
-
-@keyframes floatCTA{
-
-0%{
-transform:translateY(0px);
-}
-
-50%{
-transform:translateY(-8px);
-}
-
-100%{
-transform:translateY(0px);
-}
-
-}
-
-div[style*="position:fixed"] a{
-
-animation:floatCTA 3s ease-in-out infinite;
-
-}
-
-div[style*="position:fixed"] a:hover{
-
-transform:translateX(10px) scale(1.05);
-
+text-decoration:none;
+box-shadow:0 15px 35px rgba(0,0,0,.45);
 transition:.35s;
+position:relative;
+">
 
-filter:brightness(1.08);
+                <span style="font-size:28px;">📞</span>
 
-}
+                <!-- <span style="
+position:absolute;
+left:78px;
+white-space:nowrap;
+background:#111;
+color:white;
+padding:10px 18px;
+border-radius:40px;
+font-size:14px;
+font-weight:700;
+box-shadow:0 10px 30px rgba(0,0,0,.25);
+">
+                    +91 9142620172
+                </span> -->
 
-</style>
+            </a>
+
+        </div>
+
+    </section>
 
 
 <body>
